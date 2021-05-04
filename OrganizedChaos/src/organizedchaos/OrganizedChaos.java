@@ -7,7 +7,10 @@ package organizedchaos;
 
 /**
  *
- * @author Robert
+ * @author Robert Brewert, Carlos Carrasquero, Ignacio Lemmo
+ * @author Carlos Carrasquero
+ * 
+ * 
  */
 public class OrganizedChaos {
 
