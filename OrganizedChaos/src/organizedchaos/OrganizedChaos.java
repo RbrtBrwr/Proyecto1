@@ -8,7 +8,6 @@ package organizedchaos;
 /**
  *
  * @author Robert Brewert, Carlos Carrasquero, Ignacio Lemmo
- * @author Carlos Carrasquero
  * 
  * 
  */
