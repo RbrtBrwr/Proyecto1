@@ -3,10 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Robert/Desktop/Proyecto1/OrganizedChaos/src/Estructuras/Cola.java</file>
             <file>file:/C:/Users/Robert/Desktop/Proyecto1/OrganizedChaos/src/Estructuras/Pila.java</file>
             <file>file:/C:/Users/Robert/Desktop/Proyecto1/OrganizedChaos/src/Estructuras/ListaSimple.java</file>
             <file>file:/C:/Users/Robert/Desktop/Proyecto1/OrganizedChaos/src/Estructuras/NodoPC.java</file>
+=======
+            <file>file:/C:/Users/ijlem/Desktop/Proyecto%201/Proyecto1/OrganizedChaos/src/organizedchaos/Inventory.java</file>
+            <file>file:/C:/Users/ijlem/Desktop/Proyecto%201/Proyecto1/OrganizedChaos/src/organizedchaos/Warehouses.java</file>
+            <file>file:/C:/Users/ijlem/Desktop/Proyecto%201/Proyecto1/OrganizedChaos/src/organizedchaos/OrganizedChaos.java</file>
+            <file>file:/C:/Users/ijlem/Desktop/Proyecto%201/Proyecto1/OrganizedChaos/src/organizedchaos/Pruebas.java</file>
+>>>>>>> 43d1a94e60624654945bd465bcfc0713b7f4a71d
         </group>
     </open-files>
 </project-private>
