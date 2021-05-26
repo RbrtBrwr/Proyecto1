@@ -17,7 +17,7 @@ public class OrganizedChaos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Llamamos a la clase para abrir y leer el archivo .txt.
+        //Llamamos a la clase para abrir y leer el archivo .txt. 
         Openertxt file = new Openertxt();
         //Separo los datos del .txt en base a los ; que contenga.
         String[] separados = (file.main()).split(";");
