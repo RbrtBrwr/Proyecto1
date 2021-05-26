@@ -12,8 +12,41 @@ package organizedchaos;
 public class Warehouse {
     String name;
     ListMaker items;
+
+    /**
+     *
+     * @param letter
+     * @param inventory
+     * Se inicializa Warehouse con nombre, lista de inventario y posicion -1
+     */
     public Warehouse(String letter, ListMaker inventory){
         this.name = letter;
         this.items = inventory;
+        this.numAlmacen = -1;
+    }
+
+    int numAlmacen;
+    
+    
+
+    
+    //Muestra el nombre
+    public String nombre(){
+        return this.name;
+    }
+    
+    //Chequea si dos Warehouses son iguales 
+    public boolean iguales(Warehouse x){
+        return this.name.equals(x.nombre());
+    }
+    
+    //Asigna posicion al Warehouse
+    public void assignNum(int x){
+        this.numAlmacen = x;
+    }
+    
+    // Muestra nombre y posicion
+    public String verPos(){
+        return this.name + " (" + numAlmacen + ")";
     }
 }

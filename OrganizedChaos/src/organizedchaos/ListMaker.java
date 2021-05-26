@@ -7,7 +7,11 @@ package organizedchaos;
 
 /**
  *
+<<<<<<< HEAD
  * @author Ignacio
+=======
+ * @author Ignacio, Robert
+>>>>>>> robert
  */
 public class ListMaker {
      class Nodo{
