@@ -73,6 +73,10 @@ public class OrganizedChaos {
             }
         }
         
+        Grafo miGrafo = new Grafo(warehouseList, roadsList);
+        miGrafo.mostrarMatriz();
+        
+        /*
         MatrizAdy miMatriz = new MatrizAdy(); //Inicializamos la matriz
         miMatriz.extractAlmacenes(warehouseList); //Agregamos los almacenes de la lista a la matriz
         miMatriz.extractRoads(roadsList); // agregamos las calles a la matriz
@@ -80,5 +84,7 @@ public class OrganizedChaos {
         //warehouseList.showNodes();
         
         //roadsList.showNodes();
+        */
+        
     }
 }

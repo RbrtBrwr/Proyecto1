@@ -79,7 +79,7 @@ public class MatrizAdy {
     
     public void muestraMatriz(){ //imprime la matriz de adyacencia
         String linea = ""; //string de las lineas
-        String columnas = "[         ]"; //string para el nombre de las columnas
+        String columnas = "           "; //string para el nombre de las columnas
         for (int i=0; i<MaxN;i++){
             String nombreFila = "" + this.almacenes.getName(i); //Nombre de la fila
             if (nombreFila.length() > 1){linea += "[" + nombreFila + "]";} //Si el nombre de la fila es mas corto que un caracter, no es un almacen inicializado
@@ -87,12 +87,21 @@ public class MatrizAdy {
                 String nombreColumna = "" + this.almacenes.getName(j); //nombre de las columnas
                 if (nombreColumna.length() > 1 && nombreFila.length() > 1){ //Si el nombre de la columna y el nombre de la fila no son mas largos que un caracter, no es un almacen inicializado y no imprimimos su fila
                     columnas += "[" + this.almacenes.getName(j) + "]";
-                    linea += "[    " + mAdy[i][j] + "    ]";
+                    if (mAdy[i][j] < 10){
+                        linea += "[    " + mAdy[i][j] + "    ]";
+                    } else if (nombreColumna.length() < 100){
+                        linea += "[    " + mAdy[i][j] + "   ]";
+                    } else {
+                        linea += "[   " + mAdy[i][j] + "   ]";
+                    }
+                    
                 }
             }
             if (i == 0){System.out.println(columnas);} //Si estamos en el primer ciclo imprimimos el nombre de las columnas
-            System.out.println(linea);
-            linea = "";
+            if (linea.length() > 0){
+                System.out.println(linea);
+                linea = "";
+            }
         }
     }
     
