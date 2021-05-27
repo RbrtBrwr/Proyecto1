@@ -23,8 +23,9 @@ public class OrganizedChaos {
         Openertxt file = new Openertxt();
         //Separo los datos del .txt en base a los ; que contenga.
         String[] separados = (file.main()).split(";");
-        //Llamamos a la clase para crear la lista de Almacenes.
-        ListMaker warehouseList = new ListMaker();
+        //Llamamos a la clase para crear la lista de Almacenes y calles.
+        ListW warehouseList = new ListW();
+        ListS roadsList = new ListS();
         //Creamos un ciclo For que recorra todos los elementos que se hayan guaradado despues del split en base al ;.
         for (int i = 0; i < separados.length; i++) {
             //Generamos un if para determinar si el elemento pertenece a los almacenes.
@@ -32,7 +33,7 @@ public class OrganizedChaos {
                 // Si pertenece a los almacenes vamos a separar su información en base a los : que contengan y asi separar el nombre del almacen de sus items.
                 String[] warehouses = separados[i].split(":");
                     //Creamos otra lista, pero esta va a ser los inventarios de cada almacen.
-                    ListMaker inventoryList = new ListMaker();
+                    ListI inventoryList = new ListI();
                     //Declaramos la variable name que determinara el nombre del almacen que estemos recorriendo.
                     String name = warehouses[0].replace("\n","");
                     //Volvemos a separar, esta vez los items de cada almacen para tener su cantidad y nombre.
@@ -51,16 +52,19 @@ public class OrganizedChaos {
                         //Agregamos ese objeto a la lista que sera el inventario de cada almacen.
                         inventoryList.addLast(thing);
                     }
+                    //prueba
+                    //inventoryList.showNodes();
+                    
                     Warehouse warehouse = new Warehouse(name, inventoryList);
                     warehouseList.addLast(warehouse);
             } //Generamos un else if para determinar si el elemento pertenece a las Rutas.
             else if (separados[i].contains("Rutas")) {
                 String[] routs = separados[i + 1].split("\n");
-                ListMaker roadsList = new ListMaker();
+                
                 for (int j = 1; j < routs.length; j++) {
                     String[] streets = routs[j].split(",");
-                    String warehouse1 = streets[0];
-                    String warehouse2 = streets[1];
+                    String warehouse1 = "Almacen " + streets[0];
+                    String warehouse2 = "Almacen " + streets[1];
                     String distanceString = streets[2];
                     int distance = Integer.parseInt(distanceString);
                     Street roads = new Street(warehouse1, warehouse2, distance);
@@ -68,5 +72,13 @@ public class OrganizedChaos {
                 }
             }
         }
+        
+        MatrizAdy miMatriz = new MatrizAdy(); //Inicializamos la matriz
+        miMatriz.extractAlmacenes(warehouseList); //Agregamos los almacenes de la lista a la matriz
+        miMatriz.extractRoads(roadsList); // agregamos las calles a la matriz
+        miMatriz.muestraMatriz(); 
+        //warehouseList.showNodes();
+        
+        //roadsList.showNodes();
     }
 }

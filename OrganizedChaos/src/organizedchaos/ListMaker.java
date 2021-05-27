@@ -7,14 +7,12 @@ package organizedchaos;
 
 /**
  *
-<<<<<<< HEAD
- * @author Ignacio
-=======
+
  * @author Ignacio, Robert
->>>>>>> robert
+
  */
 public class ListMaker {
-     class Nodo{
+    class Nodo{
         Object info;
         Nodo sig;
         
@@ -65,6 +63,24 @@ public class ListMaker {
         }
         
     }
+    
+    public Object getName(int pos){
+        Nodo track = head;
+        int i = 0;
+        if (track == null) {
+            System.out.println("Lista vacia");
+            return null;
+        }
+        while (track != null){
+            if (i == pos){return track.info;}
+            
+            track = track.sig;
+            i++;
+        }
+        return " ";
+    }
+    
+    
     
     public void remove(int info){
         Nodo track = head;
@@ -117,6 +133,17 @@ public class ListMaker {
         return -1;
     }
     
+    public int find(Object busca){
+        Nodo track = head;
+        for (int i = 0; i < this.getSize(); i++){
+            if (track.info.equals(busca)){
+                return i;
+            }
+            track = track.sig;
+        }
+        return -1;
+    }
+    
     public void insertAt(int posicion, Object info){
         if (posicion == 0){
             this.addFirst(info);
@@ -137,6 +164,6 @@ public class ListMaker {
             }
         }
         
-        System.out.println("Posicion invalida");
+        //System.out.println("Posicion invalida");
     }
 }

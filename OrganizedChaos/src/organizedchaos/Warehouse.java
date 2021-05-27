@@ -11,7 +11,7 @@ package organizedchaos;
  */
 public class Warehouse {
     String name;
-    ListMaker items;
+    ListI items;
 
     /**
      *
@@ -19,7 +19,7 @@ public class Warehouse {
      * @param inventory
      * Se inicializa Warehouse con nombre, lista de inventario y posicion -1
      */
-    public Warehouse(String letter, ListMaker inventory){
+    public Warehouse(String letter, ListI inventory){
         this.name = letter;
         this.items = inventory;
         this.numAlmacen = -1;
