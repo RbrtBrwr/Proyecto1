@@ -1,15 +1,16 @@
+package organizedchaos;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package organizedchaos;
 
 /**
  *
  * @author Robert
  */
-public class PilaW {
+public class ColaW {
     private class Nodo{
         Warehouse info;
         Nodo sig;
@@ -20,7 +21,8 @@ public class PilaW {
         }
     }
     private int tamano = -1;
-    Nodo cima = null;
+    Nodo frente = null;
+    Nodo tail = null;
     
     public boolean empty(){
         return this.tamano < 1;
@@ -31,15 +33,17 @@ public class PilaW {
         
         if (this.empty()){
             this.tamano = 1;
-            cima = nuevo;            
+            frente = nuevo;   
+            tail = nuevo;
         } else {
             this.tamano ++;
-            nuevo.sig = cima;
-            cima = nuevo;
+            tail.sig = nuevo;
+            tail = nuevo;
+            
         }
     }
     
-    public int getSize(){
+    public Object getSize(){
         return this.tamano;
     }
     
@@ -47,10 +51,16 @@ public class PilaW {
         if (this.empty()){
         } else {
             
-            Warehouse aux = cima.info;
-            cima = cima.sig;
+            Warehouse aux;
+            
+            try {
+                aux = frente.info;
+            } catch(Exception e){
+                return null;//Fin
+            }
+            frente = frente.sig;
             // Aqui puedo poner para retornar l valor que elimine
-            //System.out.println(this.getSize() + " " + aux);
+            
             this.tamano --;
             return aux;
         }
@@ -58,10 +68,10 @@ public class PilaW {
     }
     
     public Warehouse top(){
-        return this.cima.info;
+        return this.tail.info;
     }
     
-    public void destroy(){
+    public void delete(){
         while (!this.empty()){
             this.pop();
         }

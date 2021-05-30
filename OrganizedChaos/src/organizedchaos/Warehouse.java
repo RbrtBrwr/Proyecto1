@@ -12,7 +12,7 @@ package organizedchaos;
 public class Warehouse {
     String name;
     ListI items;
-    boolean visitado;
+    private boolean visitado;
 
     /**
      *
@@ -24,6 +24,7 @@ public class Warehouse {
         this.name = letter;
         this.items = inventory;
         this.numAlmacen = -1;
+        this.visitado = false;
     }
 
     int numAlmacen;
@@ -49,5 +50,17 @@ public class Warehouse {
     // Muestra nombre y posicion
     public String verPos(){
         return this.name + " (" + numAlmacen + ")";
+    }
+    
+    public void cambiarVisitado(boolean visitado){
+        this.visitado = visitado;
+    }
+    
+    public void setVisitado(boolean visitado){
+        this.visitado= visitado;
+    }
+    
+    public boolean getVisitado(){
+        return this.visitado;
     }
 }

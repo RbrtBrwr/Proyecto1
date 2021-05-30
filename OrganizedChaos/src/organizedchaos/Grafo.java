@@ -110,4 +110,81 @@ public class Grafo {
             }
         }
     }
+    
+    public void BFS(Warehouse inicio){
+        ColaW queue = new ColaW();
+        int almacen = this.warehouseList.getPos(inicio);
+        if (almacen >= 0){
+            for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
+                if (laMatriz.mAdy[almacen][i] > 0){
+                    Warehouse nuevo = this.warehouseList.getWarehouse(i);
+                    if (!nuevo.getVisitado()){queue.push(nuevo);}
+                    nuevo.setVisitado(true);
+                }
+            }
+        }
+        inicio.cambiarVisitado(true);
+        System.out.println(inicio.name);
+        BFS(queue.pop(), queue);        
+    }
+    
+    public void BFS(Warehouse inicio, ColaW queue){
+
+        int almacen = this.warehouseList.getPos(inicio);
+        if (almacen >= 0){
+            for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
+                if (laMatriz.mAdy[almacen][i] > 0){
+                    Warehouse nuevo = this.warehouseList.getWarehouse(i);
+                    if (!nuevo.getVisitado()){queue.push(nuevo);}
+                    nuevo.setVisitado(true);
+                }
+            }
+        }
+        try {
+            inicio.cambiarVisitado(true);
+            System.out.println(inicio.name);
+            BFS(queue.pop(), queue); 
+        } catch (Exception e){
+            this.resetVisitado();
+        }
+    }
+    
+
+    public void DFS(Warehouse inicio){
+        PilaW stack = new PilaW();
+        int almacen = this.warehouseList.getPos(inicio);
+        if (almacen >= 0){
+            for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
+                if (laMatriz.mAdy[almacen][i] > 0){
+                    Warehouse nuevo = this.warehouseList.getWarehouse(i);
+                    if (!nuevo.getVisitado()){stack.push(nuevo);}
+                    nuevo.setVisitado(true);
+                }
+            }
+        }
+        inicio.cambiarVisitado(true);
+        System.out.println(inicio.name);
+        DFS(stack.pop(), stack);        
+    }
+    
+    public void DFS(Warehouse inicio, PilaW stack){
+        int almacen = this.warehouseList.getPos(inicio);
+        if (almacen >= 0){
+            for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
+                if (laMatriz.mAdy[almacen][i] > 0){
+                    Warehouse nuevo = this.warehouseList.getWarehouse(i);
+                    if (!nuevo.getVisitado()){stack.push(nuevo);}
+                    nuevo.setVisitado(true);
+                }
+            }
+        }
+        try {
+            inicio.cambiarVisitado(true);
+            System.out.println(inicio.name);
+            DFS(stack.pop(), stack); 
+        } catch (Exception e){
+            this.resetVisitado();
+        }
+    }
+
 }

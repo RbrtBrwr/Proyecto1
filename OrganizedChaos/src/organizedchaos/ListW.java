@@ -76,23 +76,47 @@ public class ListW {
         return null;
     }
     
+    public Warehouse getWarehouse(int pos){ 
+        Nodo track = headW;
+        int i = 0;
+        if (track == null) {
+            System.out.println("Lista vacia");
+            return null;
+        }
+        while (track != null){
+            if (i == pos){return track.info;}
+            
+            track = track.sig;
+            i++;
+        }
+        return null;
+    }
+    
+    public int getPos(Warehouse check){
+        Nodo track = headW;
+        int i = 0;
+        if (track == null) {
+            System.out.println("Lista vacia");
+            return -1;
+        }
+        while (track != null){
+            if (check == track.info){return i;}
+            
+            track = track.sig;
+            i++;
+        }
+        return -1;
+    }
+    
     /**
      * Cambia el atributo visitado del nodo a visitado.
      * @param pos
      * @param visitado 
      */
     public void setVisitado(int pos, boolean visitado){
-        Nodo track = headW;
-        int i = 0;
-        if (track == null) {
-            System.out.println("Lista vacia");
-            return;
-        }
-        while (track != null){
-            if (i == pos){track.info.visitado = visitado;}
-            
-            track = track.sig;
-        }
+        
+        Warehouse track = this.getWarehouse(pos);
+        track.cambiarVisitado(visitado);
     }
     
     /**
