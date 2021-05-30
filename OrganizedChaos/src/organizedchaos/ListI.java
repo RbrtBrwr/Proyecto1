@@ -6,7 +6,7 @@
 package organizedchaos;
 
 /**
- *
+ * Lista de Inventario
  * @author Robert
  */
 public class ListI{ //Lista para inventarios
@@ -24,8 +24,10 @@ public class ListI{ //Lista para inventarios
     
     
     
-
-    public void showNodes(){ //Muestra la informacion de los nodos en la lista
+    /**
+     * Muestra la informacion de los nodos en la lista.
+     */
+    public void showNodes(){ 
         Nodo track = headI;
         if (track == null) {
             System.out.println("Lista vacia");
@@ -37,7 +39,11 @@ public class ListI{ //Lista para inventarios
         }
     }
     
-    public void addLast(Inventory info){ //agrega al final de la lista
+    /**
+     * agrega al final de la lista
+     * @param info 
+     */
+    public void addLast(Inventory info){ 
         
         Nodo nuevo = new Nodo(info);
         if (headI == null){

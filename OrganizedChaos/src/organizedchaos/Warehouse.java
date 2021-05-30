@@ -12,6 +12,7 @@ package organizedchaos;
 public class Warehouse {
     String name;
     ListI items;
+    boolean visitado;
 
     /**
      *
