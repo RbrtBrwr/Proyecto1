@@ -21,8 +21,9 @@ public class OrganizedChaos {
         //Llamamos a la clase para abrir y leer el archivo .txt.
 
         Openertxt file = new Openertxt();
+        while (file.read() == null){file = new Openertxt();}
         //Separo los datos del .txt en base a los ; que contenga.
-        String[] separados = (file.main()).split(";");
+        String[] separados = (file.read()).split(";");
         //Llamamos a la clase para crear la lista de Almacenes y calles.
         ListW warehouseList = new ListW();
         ListS roadsList = new ListS();
@@ -77,7 +78,7 @@ public class OrganizedChaos {
         
         miGrafo.mostrarMatriz();
         
-        Warehouse A = miGrafo.warehouseList.getWarehouse(0);
+        Warehouse A = miGrafo.warehouseList.getWarehouse(2);
         
         System.out.println("BFS test");
         miGrafo.BFS(A);

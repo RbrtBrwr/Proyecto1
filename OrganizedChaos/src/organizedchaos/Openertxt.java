@@ -17,7 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Ignacio
  */
 public class Openertxt {
-    public String main() {
+    public String read() {
         String text = "";
         Scanner entry = null;
         //Se crea el JFileChooser. Se le indica que la ventana se abra en el directorio actual                    
@@ -33,12 +33,14 @@ public class Openertxt {
             String route = fileChooser.getSelectedFile().getAbsolutePath();
             try {
                 File f = new File(route);
+                if (!f.exists()){return null;}
                 entry = new Scanner(f);
                 while (entry.hasNext()) {
                     text += entry.nextLine()+ "\n";
                 }
             } catch (FileNotFoundException e) {
                 System.out.println(e.getMessage());
+
             } finally {
                 if (entry != null) {
                     entry.close();
@@ -46,6 +48,7 @@ public class Openertxt {
             }
         } else {
             System.out.println("No se ha seleccionado ningún fichero");
+            return null;
         }
         return text;
     }

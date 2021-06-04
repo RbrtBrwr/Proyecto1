@@ -24,8 +24,8 @@ public class MatrizAdy {
         this.almacenes = new ListMaker();
         this.numAlmacenes = 0;
         for (int i = 0; i < MaxN; i++){
-            for (int j = 0; i < MaxN; i++){
-                mAdy[i][j] = 0;
+            for (int j = 0; j < MaxN; j++){
+                mAdy[i][j] = -1;
             }
         }
     }
@@ -104,7 +104,9 @@ public class MatrizAdy {
                 String nombreColumna = "" + this.almacenes.getName(j); //nombre de las columnas
                 if (nombreColumna.length() > 1 && nombreFila.length() > 1){ //Si el nombre de la columna y el nombre de la fila no son mas largos que un caracter, no es un almacen inicializado y no imprimimos su fila
                     columnas += "[" + this.almacenes.getName(j) + "]";
-                    if (mAdy[i][j] < 10){
+                    if (mAdy[i][j] < 0){
+                        linea += "[   " + mAdy[i][j] + "    ]";                    
+                    } else if (mAdy[i][j] < 10){
                         linea += "[    " + mAdy[i][j] + "    ]";
                     } else if (nombreColumna.length() < 100){
                         linea += "[    " + mAdy[i][j] + "   ]";

@@ -140,6 +140,17 @@ public class Grafo {
                 }
             }
         }
+        inicio.cambiarVisitado(true);
+        System.out.println(inicio.name);
+        if (!queue.empty()){
+            
+            BFS(queue.pop(), queue); 
+        }
+
+        this.resetVisitado();
+        
+        
+        /*
         try {
             inicio.cambiarVisitado(true);
             System.out.println(inicio.name);
@@ -147,6 +158,7 @@ public class Grafo {
         } catch (Exception e){
             this.resetVisitado();
         }
+        */
     }
     
 
