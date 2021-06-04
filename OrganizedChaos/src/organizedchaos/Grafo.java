@@ -46,9 +46,13 @@ public class Grafo {
      * @param calle2 
      */
     public void agregarAlmacen(Warehouse almacen, Street calle1, Street calle2){
-        this.laMatriz.nuevoAlmacen(almacen);
-        this.laMatriz.nuevaCalle(calle1.out, calle1.in, calle1.distance, this.roadsList);
-        this.laMatriz.nuevaCalle(calle2.out, calle2.in, calle2.distance, this.roadsList);
+        if (this.laMatriz.nuevoAlmacen(almacen) == 1) {System.out.println("Nodo ya existe");}
+        else if (this.laMatriz.nuevoAlmacen(almacen) == 2) {System.out.println("Maximo de nodos alcanzados");}
+        else {
+            this.laMatriz.nuevoAlmacen(almacen);
+            this.laMatriz.nuevaCalle(calle1.out, calle1.in, calle1.distance, this.roadsList);
+            this.laMatriz.nuevaCalle(calle2.out, calle2.in, calle2.distance, this.roadsList);
+        }
         
     }
     
@@ -190,13 +194,13 @@ public class Grafo {
                 }
             }
         }
-        try {
-            inicio.cambiarVisitado(true);
-            System.out.println(inicio.name);
-            DFS(stack.pop(), stack); 
-        } catch (Exception e){
-            this.resetVisitado();
+        
+        inicio.cambiarVisitado(true);
+        System.out.println(inicio.name);
+        if (!stack.empty()){
+            DFS(stack.pop(), stack);
         }
+        this.resetVisitado();
     }
 
 }

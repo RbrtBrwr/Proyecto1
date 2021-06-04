@@ -44,25 +44,29 @@ public class MatrizAdy {
      * Recibe el nombre del almacen y su inventario para agregarlo a la matriz.
      * @param nombre
      * @param inventario 
+     * @return  int, 1 si ya existe, 2 si ya estamos en maximo almacenes, 0 si se agrego exitosamente;
      */
-    public void nuevoAlmacen(String nombre, ListI inventario){
-        if (this.numAlmacenes == MaxN){return;} // Si llegamos al numero maximo de almacenes, salgo
+    public int nuevoAlmacen(String nombre, ListI inventario){
+        if (this.numAlmacenes == MaxN){return 2;} // Si llegamos al numero maximo de almacenes, salgo
         
         if (!(this.getNumAlmacen(nombre) >= 0)){ // Si el almacen no esta en la lista
             Warehouse nuevo = new Warehouse(nombre, inventario);
             nuevo.assignNum(this.numAlmacenes); // Asigno su posicion
             this.almacenes.insertAt(this.numAlmacenes, nuevo.nombre()); //Agrego a la lista en la posicion
             this.numAlmacenes++; //Aumento el numero de almacenes
+            return 0;
         }
+        return 1;
         
     }
     
     /**
      * Pasamos un almacen para agregar a la matriz
      * @param nuevo 
+     * @return  int, 1 si ya existe, 2 si ya estamos en maximo almacenes, 0 si se agrego exitosamente;
      */
-    public void nuevoAlmacen(Warehouse nuevo){ 
-        if (this.numAlmacenes == MaxN){return;} // Si llegamos al numero maximo de almacenes, salgo
+    public int nuevoAlmacen(Warehouse nuevo){ 
+        if (this.numAlmacenes == MaxN){return 2;} // Si llegamos al numero maximo de almacenes, salgo
         
         String nombre = nuevo.nombre();
         
@@ -70,7 +74,10 @@ public class MatrizAdy {
             nuevo.assignNum(this.numAlmacenes); // Asigno su posicion
             this.almacenes.insertAt(this.numAlmacenes, nuevo.nombre()); //Agrego a la lista en la posicion
             this.numAlmacenes++; //Aumento el numero de almacenes
+            return 0;
         }
+        
+        return 1;
         
     }
     
