@@ -21,7 +21,7 @@ public class OrganizedChaos {
         //Llamamos a la clase para abrir y leer el archivo .txt.
 
         Openertxt file = new Openertxt();
-        while (file.read() == null){file = new Openertxt();}
+        if (file.read() == null){System.exit(0);}
         //Separo los datos del .txt en base a los ; que contenga.
         String[] separados = (file.read()).split(";");
         //Llamamos a la clase para crear la lista de Almacenes y calles.
