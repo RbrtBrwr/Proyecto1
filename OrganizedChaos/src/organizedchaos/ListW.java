@@ -76,6 +76,11 @@ public class ListW {
         return null;
     }
     
+    /**
+     * Retorna el Warehouse en la posicion indicada
+     * @param pos
+     * @return Warehouse
+     */
     public Warehouse getWarehouse(int pos){ 
         Nodo track = headW;
         int i = 0;
@@ -92,6 +97,11 @@ public class ListW {
         return null;
     }
     
+    /**
+     * Retorna la posicion del warehouse indicado
+     * @param check
+     * @return int posicion
+     */
     public int getPos(Warehouse check){
         Nodo track = headW;
         int i = 0;

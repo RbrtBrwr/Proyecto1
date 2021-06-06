@@ -86,15 +86,14 @@ public class OrganizedChaos {
 
             miGrafo.mostrarMatriz();
 
-            Warehouse A = miGrafo.warehouseList.getWarehouse(2);
-
-            System.out.println("BFS test");
-            miGrafo.BFS(A);
-            System.out.println("\nDFS test");
-            miGrafo.DFS(A);
+            //miGrafo.DFSTodo();
+            System.out.println(miGrafo.DFSTodo());
+            System.out.println(miGrafo.BFSTodo());
             
-            System.out.println("BFS test");
-            miGrafo.BFS(A);
+            System.out.println(miGrafo.BFSItem("ram"));
+            System.out.println(miGrafo.DFSItem("grafica"));
+            
+            //miGrafo.DFSItem("grafica");
 
             //miGrafo.warehouseList.showNodes();
             //miGrafo.roadsList.showNodes();

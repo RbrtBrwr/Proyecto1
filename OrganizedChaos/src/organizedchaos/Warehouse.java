@@ -7,7 +7,7 @@ package organizedchaos;
 
 /**
  *
- * @author Ignacio
+ * @author Ignacio, Robert
  */
 public class Warehouse {
     String name;
@@ -62,5 +62,24 @@ public class Warehouse {
     
     public boolean getVisitado(){
         return this.visitado;
+    }
+    
+    public String mostrarInventario(){
+        String outString = "";
+        outString += "Inventario " + this.name + ":\n";
+        outString += this.items.showNodes();
+        outString += "\n";
+        return outString;
+    }
+    
+    public String buscarProducto(String producto){
+        String outString = "";
+        Inventory encontrado = this.items.buscarItem(producto);
+        if (encontrado != null){
+            outString += "Inventario " + this.name + ":\n";
+            outString += encontrado.name + ": " + encontrado.quantity;
+            outString += "\n";
+        }
+        return outString;
     }
 }

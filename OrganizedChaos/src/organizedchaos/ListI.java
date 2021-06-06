@@ -26,17 +26,21 @@ public class ListI{ //Lista para inventarios
     
     /**
      * Muestra la informacion de los nodos en la lista.
+     * @return outString String con el inventario
      */
-    public void showNodes(){ 
+    public String showNodes(){ 
         Nodo track = headI;
+        String outString = "";
         if (track == null) {
             System.out.println("Lista vacia");
-            return;
+            return null;
         }
         while (track != null){
-            System.out.println(track.info.name + ": " + track.info.quantity);
+            outString += track.info.name + ": " + track.info.quantity;
+            outString += "\n";
             track = track.sig;
         }
+        return outString;
     }
     
     /**
@@ -52,5 +56,24 @@ public class ListI{ //Lista para inventarios
             tailI.sig = nuevo;
             tailI = nuevo;
         }
+    }
+    
+    /**
+     * busca el Item indicado
+     * @param nombre
+     * @return el Item que busca o null
+     */
+    public Inventory buscarItem(String nombre){
+        Nodo track = headI;
+        if (track == null) {
+            return null;
+        }
+        while (track != null){
+            if (nombre.equalsIgnoreCase(track.info.name)){
+                return track.info;
+            }
+            track = track.sig;
+        }
+        return null;
     }
 }

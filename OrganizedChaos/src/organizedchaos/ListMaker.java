@@ -6,10 +6,8 @@
 package organizedchaos;
 
 /**
- *
-
+ * Lista enlazada simple generica
  * @author Ignacio, Robert
-
  */
 public class ListMaker {
     class Nodo{

@@ -15,6 +15,8 @@ public class Grafo {
     ListW warehouseList;
     ListS roadsList;
     MatrizAdy laMatriz;
+    
+    //ESTO ES UNA PRUEBA PARA VER SI EL ERROR SIGUE
 
     /**
      * 
@@ -46,12 +48,18 @@ public class Grafo {
      * @param calle2 
      */
     public void agregarAlmacen(Warehouse almacen, Street calle1, Street calle2){
-        if (this.laMatriz.nuevoAlmacen(almacen) == 1) {System.out.println("Nodo ya existe");}
-        else if (this.laMatriz.nuevoAlmacen(almacen) == 2) {System.out.println("Maximo de nodos alcanzados");}
-        else {
-            this.laMatriz.nuevoAlmacen(almacen);
-            this.laMatriz.nuevaCalle(calle1.out, calle1.in, calle1.distance, this.roadsList);
-            this.laMatriz.nuevaCalle(calle2.out, calle2.in, calle2.distance, this.roadsList);
+        switch (this.laMatriz.nuevoAlmacen(almacen)) {
+            case 1:
+                System.out.println("Nodo ya existe");
+                break;
+            case 2:
+                System.out.println("Maximo de nodos alcanzados");
+                break;
+            default:
+                this.laMatriz.nuevoAlmacen(almacen);
+                this.laMatriz.nuevaCalle(calle1.out, calle1.in, calle1.distance, this.roadsList);
+                this.laMatriz.nuevaCalle(calle2.out, calle2.in, calle2.distance, this.roadsList);
+                break;
         }
         
     }
@@ -115,7 +123,23 @@ public class Grafo {
         }
     }
     
-    public void BFS(Warehouse inicio){
+    public String mostrarTodos(Warehouse info){
+        return info.mostrarInventario();
+    }
+    
+    public String mostrarProducto(Warehouse info, String producto){
+        //String outString = "";
+        return info.buscarProducto(producto);
+    }
+    
+    /**
+     * Breadth First Search todos los items, metodo inicial
+     * Imprime el inventario de cada Warehouse en el orden del BFS
+     * @return outString string con las cosas
+     */
+    public String BFSTodo(){
+        String outString = "";
+        Warehouse inicio = this.warehouseList.getWarehouse(0);
         ColaW queue = new ColaW();
         int almacen = this.warehouseList.getPos(inicio);
         if (almacen >= 0){
@@ -127,13 +151,19 @@ public class Grafo {
                 }
             }
         }
+        outString += "\n----- BFS: -----\n" + this.mostrarTodos(inicio) + "\n" + BFSTodo(queue.pop(), queue);
         inicio.cambiarVisitado(true);
-        System.out.println(inicio.name);
-        BFS(queue.pop(), queue);        
+        return outString;
     }
     
-    public void BFS(Warehouse inicio, ColaW queue){
-
+    /**
+     * Breadth First Search todos los items metodo secundario, lo llama el metodo inicial
+     * @param inicio
+     * @param queue 
+     * @return outString string con las cosas
+     */
+    public String BFSTodo(Warehouse inicio, ColaW queue){
+        String outString = "";
         int almacen = this.warehouseList.getPos(inicio);
         if (almacen >= 0){
             for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
@@ -145,28 +175,93 @@ public class Grafo {
             }
         }
         inicio.cambiarVisitado(true);
-        System.out.println(inicio.name);
+        outString += this.mostrarTodos(inicio) + "\n";
         if (!queue.empty()){
             
-            BFS(queue.pop(), queue); 
+            outString += BFSTodo(queue.pop(), queue); 
+        } 
+        this.resetVisitado();
+        return outString;
+
+        
+
+    }
+    
+    /**
+     * BFSItem inicial
+     * Busca un item especifico mediante BFS
+     * @param item 
+     * @return  String con la diponibiliadad
+     */
+    public String BFSItem(String item){
+        String outString = "";
+        Warehouse inicio = this.warehouseList.getWarehouse(0);
+        //outString += "\n----- BFS: -----\n";
+        ColaW queue = new ColaW();
+        int almacen = this.warehouseList.getPos(inicio);
+        if (almacen >= 0){
+            for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
+                if (laMatriz.mAdy[almacen][i] > 0){
+                    Warehouse nuevo = this.warehouseList.getWarehouse(i);
+                    if (!nuevo.getVisitado()){queue.push(nuevo);}
+                    nuevo.setVisitado(true);
+                }
+            }
+        }
+        outString += this.mostrarProducto(inicio, item) + "\n";
+        inicio.cambiarVisitado(true);
+        if (outString.length() < 3){
+            outString = BFSItem(item, queue.pop(), queue);
+        } else {
+            outString += BFSItem(item, queue.pop(), queue);
+        }
+        outString = "\n----- DFS: -----\n" + outString; 
+        return outString;
+    }
+    
+    /**
+     * BFSItem metodo secundario
+     * @param item
+     * @param inicio
+     * @param queue 
+     * @return  String con los items
+     */
+    public String BFSItem(String item, Warehouse inicio, ColaW queue){
+        String outString = "";
+        int almacen = this.warehouseList.getPos(inicio);
+        if (almacen >= 0){
+            for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
+                if (laMatriz.mAdy[almacen][i] > 0){
+                    Warehouse nuevo = this.warehouseList.getWarehouse(i);
+                    if (!nuevo.getVisitado()){queue.push(nuevo);}
+                    nuevo.setVisitado(true);
+                }
+            }
+        }
+        inicio.cambiarVisitado(true);
+        outString += this.mostrarProducto(inicio, item) + "\n";
+        if (!queue.empty()){
+            if (outString.length() < 3){
+                outString = BFSItem(item, queue.pop(), queue);
+            } else {
+                outString += BFSItem(item, queue.pop(), queue);
+            }
         }
 
         this.resetVisitado();
-        
-        
-        /*
-        try {
-            inicio.cambiarVisitado(true);
-            System.out.println(inicio.name);
-            BFS(queue.pop(), queue); 
-        } catch (Exception e){
-            this.resetVisitado();
-        }
-        */
+        return outString;
+
     }
     
-
-    public void DFS(Warehouse inicio){
+    /**
+     * Depth First Search todos los items, metodo inicial
+     * Imprime el inventario de cada warehouse en orden del DFS, empezando por el primero de la lista
+     * @return String con los inventarios
+     */
+    public String DFSTodo(){
+        String outString = "";
+        Warehouse inicio = this.warehouseList.getWarehouse(0);
+        //outString += "\n----- DFS: -----\n";
         PilaW stack = new PilaW();
         int almacen = this.warehouseList.getPos(inicio);
         if (almacen >= 0){
@@ -178,12 +273,21 @@ public class Grafo {
                 }
             }
         }
+        outString += this.mostrarTodos(inicio) + "\n" + DFSTodo(stack.pop(), stack);
         inicio.cambiarVisitado(true);
-        System.out.println(inicio.name);
-        DFS(stack.pop(), stack);        
+        //outString += DFSTodo(stack.pop(), stack); 
+        outString = "\n----- DFS: -----\n" + outString;
+        return outString;
     }
     
-    public void DFS(Warehouse inicio, PilaW stack){
+    /**
+     * Depth First Search todos los items, metodo secundario
+     * @param inicio
+     * @param stack 
+     * @return  String con el inventario
+     */
+    public String DFSTodo(Warehouse inicio, PilaW stack){
+        String outString = "";
         int almacen = this.warehouseList.getPos(inicio);
         if (almacen >= 0){
             for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
@@ -196,11 +300,85 @@ public class Grafo {
         }
         
         inicio.cambiarVisitado(true);
-        System.out.println(inicio.name);
+        outString += this.mostrarTodos(inicio) + "\n";
         if (!stack.empty()){
-            DFS(stack.pop(), stack);
+            if (outString.length() < 3){
+                outString = DFSTodo(stack.pop(), stack);
+            } else {
+                outString += DFSTodo(stack.pop(), stack);
+            }
         }
         this.resetVisitado();
+        return outString;
     }
+    
+    /**
+     * Metodo DFS item inicial
+     * Busca item especificado com DFS
+     * @param item 
+     * @return  String con los warehouses que tienen el item
+     */
+    public String DFSItem(String item){
+        String outString = "";
+        Warehouse inicio = this.warehouseList.getWarehouse(0);
+        //outString += "\n----- DFS: -----\n";
+        PilaW stack = new PilaW();
+        int almacen = this.warehouseList.getPos(inicio);
+        if (almacen >= 0){
+            for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
+                if (laMatriz.mAdy[almacen][i] > 0){
+                    Warehouse nuevo = this.warehouseList.getWarehouse(i);
+                    if (!nuevo.getVisitado()){stack.push(nuevo);}
+                    nuevo.setVisitado(true);
+                }
+            }
+        }
+        outString += this.mostrarProducto(inicio, item) + "\n";
+        inicio.cambiarVisitado(true);
+        if (outString.length() < 3){
+            outString = DFSItem(item, stack.pop(), stack);
+        } else {
+            outString += DFSItem(item, stack.pop(), stack);
+        }
+        
+        outString = "\n----- DFS: -----\n" + outString; 
+        return outString;
+    }
+    
+    /**
+     * Metodo DFS item secundario
+     * @param item
+     * @param inicio
+     * @param stack 
+     * @return  String con los warehouses que tienene el item
+     */
+    public String DFSItem(String item, Warehouse inicio, PilaW stack){
+        String outString = "";
+        int almacen = this.warehouseList.getPos(inicio);
+        if (almacen >= 0){
+            for (int i = 0; i <= laMatriz.numAlmacenes; i ++){
+                if (laMatriz.mAdy[almacen][i] > 0){
+                    Warehouse nuevo = this.warehouseList.getWarehouse(i);
+                    if (!nuevo.getVisitado()){stack.push(nuevo);}
+                    nuevo.setVisitado(true);
+                }
+            }
+        }
+        
+        outString += this.mostrarProducto(inicio, item) + "\n";
+        inicio.cambiarVisitado(true);
+        if (!stack.empty()){
+            if (outString.length() < 3){
+                outString = DFSItem(item, stack.pop(), stack);
+            } else {
+                outString += DFSItem(item, stack.pop(), stack);
+            }
+            
+        }
+        this.resetVisitado();
+        return outString;
+    }
+    
+    
 
 }
