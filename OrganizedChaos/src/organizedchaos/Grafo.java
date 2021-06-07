@@ -15,8 +15,6 @@ public class Grafo {
     ListW warehouseList;
     ListS roadsList;
     MatrizAdy laMatriz;
-    
-    //ESTO ES UNA PRUEBA PARA VER SI EL ERROR SIGUE
 
     /**
      * 
@@ -103,7 +101,10 @@ public class Grafo {
         for (int i = 0; i < this.laMatriz.numAlmacenes; i++){
             int fila = 0;
             for (int j = 0; j < this.laMatriz.numAlmacenes; j++){
-                fila += laMatriz.mAdy[i][j];
+                if (0 < laMatriz.mAdy[i][j]){
+                    fila += laMatriz.mAdy[i][j];
+                }
+                
             }
             if(fila < 1){
                 System.out.println(this.warehouseList.getName(i) + " necesita una salida"); // aqui quiero que me pida un input para una calle, y despues vuelvo a chequear
@@ -114,21 +115,36 @@ public class Grafo {
         for (int i = 0; i < this.laMatriz.numAlmacenes; i++){
             int fila = 0;
             for (int j = 0; j < this.laMatriz.numAlmacenes; j++){
-                fila += laMatriz.mAdy[j][i];
+                if (0 < laMatriz.mAdy[j][i]){
+                    fila += laMatriz.mAdy[j][i];
+                }
+                
             }
             if(fila < 1){
                 System.out.println(this.warehouseList.getName(i) + " necesita una entrada"); // aqui quiero que me pida un input para una calle, y despues vuelvo a chequear
                 return;
             }
         }
+        
+        System.out.println("Todo en orden");
     }
     
+    /**
+     * retorna todos los items del inventario con sus cantidades
+     * @param info
+     * @return String
+     */
     public String mostrarTodos(Warehouse info){
         return info.mostrarInventario();
     }
     
+    /**
+     * Retorna solamente el producto especificado por almacen y su cantidad
+     * @param info
+     * @param producto
+     * @return String
+     */
     public String mostrarProducto(Warehouse info, String producto){
-        //String outString = "";
         return info.buscarProducto(producto);
     }
     
@@ -140,6 +156,7 @@ public class Grafo {
     public String BFSTodo(){
         String outString = "";
         Warehouse inicio = this.warehouseList.getWarehouse(0);
+        inicio.setVisitado(true);
         ColaW queue = new ColaW();
         int almacen = this.warehouseList.getPos(inicio);
         if (almacen >= 0){
@@ -152,7 +169,7 @@ public class Grafo {
             }
         }
         outString += "\n----- BFS: -----\n" + this.mostrarTodos(inicio) + "\n" + BFSTodo(queue.pop(), queue);
-        inicio.cambiarVisitado(true);
+        
         return outString;
     }
     
@@ -174,7 +191,7 @@ public class Grafo {
                 }
             }
         }
-        inicio.cambiarVisitado(true);
+        inicio.setVisitado(true);
         outString += this.mostrarTodos(inicio) + "\n";
         if (!queue.empty()){
             
@@ -209,7 +226,7 @@ public class Grafo {
             }
         }
         outString += this.mostrarProducto(inicio, item) + "\n";
-        inicio.cambiarVisitado(true);
+        inicio.setVisitado(true);
         if (outString.length() < 3){
             outString = BFSItem(item, queue.pop(), queue);
         } else {
@@ -238,7 +255,7 @@ public class Grafo {
                 }
             }
         }
-        inicio.cambiarVisitado(true);
+        inicio.setVisitado(true);
         outString += this.mostrarProducto(inicio, item) + "\n";
         if (!queue.empty()){
             if (outString.length() < 3){
@@ -261,7 +278,7 @@ public class Grafo {
     public String DFSTodo(){
         String outString = "";
         Warehouse inicio = this.warehouseList.getWarehouse(0);
-        //outString += "\n----- DFS: -----\n";
+        inicio.setVisitado(true);
         PilaW stack = new PilaW();
         int almacen = this.warehouseList.getPos(inicio);
         if (almacen >= 0){
@@ -274,8 +291,7 @@ public class Grafo {
             }
         }
         outString += this.mostrarTodos(inicio) + "\n" + DFSTodo(stack.pop(), stack);
-        inicio.cambiarVisitado(true);
-        //outString += DFSTodo(stack.pop(), stack); 
+
         outString = "\n----- DFS: -----\n" + outString;
         return outString;
     }
@@ -299,7 +315,7 @@ public class Grafo {
             }
         }
         
-        inicio.cambiarVisitado(true);
+        inicio.setVisitado(true);
         outString += this.mostrarTodos(inicio) + "\n";
         if (!stack.empty()){
             if (outString.length() < 3){
@@ -334,7 +350,7 @@ public class Grafo {
             }
         }
         outString += this.mostrarProducto(inicio, item) + "\n";
-        inicio.cambiarVisitado(true);
+        inicio.setVisitado(true);
         if (outString.length() < 3){
             outString = DFSItem(item, stack.pop(), stack);
         } else {
@@ -366,7 +382,7 @@ public class Grafo {
         }
         
         outString += this.mostrarProducto(inicio, item) + "\n";
-        inicio.cambiarVisitado(true);
+        inicio.setVisitado(true);
         if (!stack.empty()){
             if (outString.length() < 3){
                 outString = DFSItem(item, stack.pop(), stack);
@@ -378,7 +394,4 @@ public class Grafo {
         this.resetVisitado();
         return outString;
     }
-    
-    
-
 }

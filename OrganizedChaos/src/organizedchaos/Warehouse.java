@@ -51,13 +51,10 @@ public class Warehouse {
     public String verPos(){
         return this.name + " (" + numAlmacen + ")";
     }
-    
-    public void cambiarVisitado(boolean visitado){
-        this.visitado = visitado;
-    }
+
     
     public void setVisitado(boolean visitado){
-        this.visitado= visitado;
+        this.visitado = visitado;
     }
     
     public boolean getVisitado(){
@@ -67,8 +64,7 @@ public class Warehouse {
     public String mostrarInventario(){
         String outString = "";
         outString += "Inventario " + this.name + ":\n";
-        outString += this.items.showNodes();
-        outString += "\n";
+        outString += this.items.showNodes() + "\n";
         return outString;
     }
     
@@ -77,8 +73,7 @@ public class Warehouse {
         Inventory encontrado = this.items.buscarItem(producto);
         if (encontrado != null){
             outString += "Inventario " + this.name + ":\n";
-            outString += encontrado.name + ": " + encontrado.quantity;
-            outString += "\n";
+            outString += encontrado.name + ": " + encontrado.quantity + "\n";
         }
         return outString;
     }

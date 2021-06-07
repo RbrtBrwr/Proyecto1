@@ -36,8 +36,7 @@ public class ListI{ //Lista para inventarios
             return null;
         }
         while (track != null){
-            outString += track.info.name + ": " + track.info.quantity;
-            outString += "\n";
+            outString += track.info.name + ": " + track.info.quantity + "\n";
             track = track.sig;
         }
         return outString;

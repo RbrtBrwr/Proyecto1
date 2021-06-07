@@ -86,41 +86,25 @@ public class OrganizedChaos {
 
             miGrafo.mostrarMatriz();
 
-            //miGrafo.DFSTodo();
+
             System.out.println(miGrafo.DFSTodo());
             System.out.println(miGrafo.BFSTodo());
             
             System.out.println(miGrafo.BFSItem("ram"));
             System.out.println(miGrafo.DFSItem("grafica"));
-            
-            //miGrafo.DFSItem("grafica");
-
-            //miGrafo.warehouseList.showNodes();
-            //miGrafo.roadsList.showNodes();
-            /*
             miGrafo.checkStreets();
+
             Street nueva = new Street("Almacen E", "Almacen B", 12);
             miGrafo.agregarCalle(nueva);
 
             nueva = new Street("Almacen D", "Almacen D", 12);
             miGrafo.agregarCalle(nueva);
-            */
-
-
-            /*
             miGrafo.mostrarMatriz();
-            miGrafo.checkStreets();
-            miGrafo.roadsList.showNodes();
-            */
-            /*
-            MatrizAdy miMatriz = new MatrizAdy(); //Inicializamos la matriz
-            miMatriz.extractAlmacenes(warehouseList); //Agregamos los almacenes de la lista a la matriz
-            miMatriz.extractRoads(roadsList); // agregamos las calles a la matriz
-            miMatriz.muestraMatriz(); 
-            //warehouseList.showNodes();
 
-            //roadsList.showNodes();
-            */
+
+
+
+
         
         } catch (NullPointerException e){
             System.exit(0);

@@ -124,9 +124,8 @@ public class ListW {
      * @param visitado 
      */
     public void setVisitado(int pos, boolean visitado){
-        
         Warehouse track = this.getWarehouse(pos);
-        track.cambiarVisitado(visitado);
+        track.setVisitado(visitado);
     }
     
     /**
