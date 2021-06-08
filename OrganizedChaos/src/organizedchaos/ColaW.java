@@ -11,25 +11,16 @@ package organizedchaos;
  * @author Robert
  */
 public class ColaW {
-    private class Nodo{
-        Warehouse info;
-        Nodo sig;
-        
-        private Nodo(Warehouse info){
-            this.info = info;
-            this.sig = null;
-        }
-    }
     private int tamano = -1;
-    Nodo frente = null;
-    Nodo tail = null;
+    NodoW frente = null;
+    NodoW tail = null;
     
     public boolean empty(){
         return this.tamano < 1;
     }
     
     public void push(Warehouse info){
-        Nodo nuevo = new Nodo(info);
+        NodoW nuevo = new NodoW(info);
         
         if (this.empty()){
             this.tamano = 1;
@@ -43,7 +34,7 @@ public class ColaW {
         }
     }
     
-    public Object getSize(){
+    public int getSize(){
         return this.tamano;
     }
     

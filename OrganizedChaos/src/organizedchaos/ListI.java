@@ -22,7 +22,9 @@ public class ListI{ //Lista para inventarios
     Nodo headI = null;
     Nodo tailI = null;
     
-    
+    public boolean empty(){
+        return headI == null;
+    }
     
     /**
      * Muestra la informacion de los nodos en la lista.
@@ -64,9 +66,6 @@ public class ListI{ //Lista para inventarios
      */
     public Inventory buscarItem(String nombre){
         Nodo track = headI;
-        if (track == null) {
-            return null;
-        }
         while (track != null){
             if (nombre.equalsIgnoreCase(track.info.name)){
                 return track.info;
@@ -74,5 +73,83 @@ public class ListI{ //Lista para inventarios
             track = track.sig;
         }
         return null;
+    }
+    
+    public void eliminarItem(Inventory item){
+        Nodo track = headI.sig;
+        Nodo pasado = headI;
+        if (headI.info == item){
+            headI = headI.sig;
+            return;
+        }
+        while (track != null){
+            if(track.info == item){
+                pasado.sig = track.sig;
+                return;
+            }
+            pasado = track;
+            track = track.sig;
+        }
+    }
+    
+    public void descontar(String item, int cantidad){
+        Nodo track = headI;
+        while (track != null){
+            if (item.equalsIgnoreCase(track.info.name)){
+                if(track.info.quantity > cantidad){
+                    track.info.quantity -= cantidad;
+                    return;
+                } else if (track.info.quantity == cantidad){
+                    track.info.quantity -= cantidad;
+                    this.eliminarItem(track.info);
+                    return;
+                } else {
+                    // solo se tienen x cantidad del item, en este caso pedimos a otro almacen
+                }
+            }
+            track = track.sig;
+        }
+    }
+    
+    public void descontar(Inventory producto){
+        String item = producto.name;
+        int cantidad = producto.quantity;
+        Nodo track = headI;
+        while (track != null){
+            if (item.equalsIgnoreCase(track.info.name)){
+                if(track.info.quantity > cantidad){
+                    track.info.quantity -= cantidad;
+                    return;
+                } else if (track.info.quantity == cantidad){
+                    track.info.quantity -= cantidad;
+                    this.eliminarItem(track.info);
+                    return;
+                } else {
+                    // solo se tienen x cantidad del item, en este caso pedimos a otro almacen
+                }
+            }
+            track = track.sig;
+        }
+    }
+    
+    public void agregarItem(Inventory item){
+        Nodo track = headI;
+        while (track != null){
+            if (item.name.equalsIgnoreCase(track.info.name)){
+                track.info.quantity += item.quantity;
+                return;
+            }
+            track = track.sig;
+        }
+        this.addLast(item);
+    }
+    
+    public void juntar(ListI segunda){
+        Nodo track = segunda.headI;
+        
+        while (track != null){
+            this.agregarItem(track.info);
+            track = track.sig;
+        }
     }
 }

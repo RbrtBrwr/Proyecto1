@@ -18,7 +18,7 @@ public class MatrizAdy {
     int[][] mAdy;
     
     
-    //Inicializo la matriz con 0s
+    //Inicializo la matriz con -1s
     public MatrizAdy(){
         this.mAdy = new int [MaxN][MaxN];
         this.almacenes = new ListMaker();
@@ -87,7 +87,7 @@ public class MatrizAdy {
      * @param warehouseList 
      */
     public void extractAlmacenes(ListW warehouseList){
-        ListW.Nodo track = warehouseList.headW; //Nodo para recorrer la lista
+        NodoW track = warehouseList.headW; //Nodo para recorrer la lista
         if (track == null) { //Si la lista esta vacia retorna
             System.out.println("No hay almacenes");
             return;

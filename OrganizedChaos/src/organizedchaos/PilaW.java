@@ -10,24 +10,15 @@ package organizedchaos;
  * @author Robert
  */
 public class PilaW {
-    private class Nodo{
-        Warehouse info;
-        Nodo sig;
-        
-        private Nodo(Warehouse info){
-            this.info = info;
-            this.sig = null;
-        }
-    }
     private int tamano = -1;
-    Nodo cima = null;
+    NodoW cima = null;
     
     public boolean empty(){
         return this.tamano < 1;
     }
     
     public void push(Warehouse info){
-        Nodo nuevo = new Nodo(info);
+        NodoW nuevo = new NodoW(info);
         
         if (this.empty()){
             this.tamano = 1;

@@ -10,25 +10,14 @@ package organizedchaos;
  * @author Robert
  */
 public class ListW {
-    protected class Nodo{
-        Warehouse info;
-        Nodo sig;
-        
-        public Nodo(Warehouse info){
-            this.info = info;
-            this.sig = null;
-        }
-    }
-    Nodo headW = null;
-    Nodo tailW = null;
-    
-    
+    NodoW headW = null;
+    NodoW tailW = null;    
     
     /**
      * Imprime los nodos de la lista.
      */
     public void showNodes(){
-        Nodo track = headW;
+        NodoW track = headW;
         if (track == null) {
             System.out.println("Lista vacia");
             return;
@@ -46,7 +35,7 @@ public class ListW {
      */
     public void addLast(Warehouse info){
         
-        Nodo nuevo = new Nodo(info);
+        NodoW nuevo = new NodoW(info);
         if (headW == null){
             headW = tailW = nuevo;
         } else {
@@ -61,7 +50,7 @@ public class ListW {
      * @return 
      */
     public String getName(int pos){ 
-        Nodo track = headW;
+        NodoW track = headW;
         int i = 0;
         if (track == null) {
             System.out.println("Lista vacia");
@@ -82,7 +71,7 @@ public class ListW {
      * @return Warehouse
      */
     public Warehouse getWarehouse(int pos){ 
-        Nodo track = headW;
+        NodoW track = headW;
         int i = 0;
         if (track == null) {
             System.out.println("Lista vacia");
@@ -103,7 +92,7 @@ public class ListW {
      * @return int posicion
      */
     public int getPos(Warehouse check){
-        Nodo track = headW;
+        NodoW track = headW;
         int i = 0;
         if (track == null) {
             System.out.println("Lista vacia");
@@ -133,7 +122,7 @@ public class ListW {
      * @return 
      */
     public int getSize(){
-        Nodo track = headW;
+        NodoW track = headW;
         int size = 0;
         while (track != null){
             size ++;
@@ -147,8 +136,8 @@ public class ListW {
      * @param warehouseName 
      */
     public void removeNode(String warehouseName){
-        Nodo track = headW;
-        Nodo prev = null;
+        NodoW track = headW;
+        NodoW prev = null;
         while (track != null){
             if (headW.info.name == null ? warehouseName == null : headW.info.name.equals(warehouseName)){
                 headW = headW.sig;

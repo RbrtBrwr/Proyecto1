@@ -62,17 +62,18 @@ public class Grafo {
         
     }
     
-    
     /**
      * 
      * @param calle 
      */
     public void agregarCalle(Street calle){
-        
+        if (calle.distance < 1){
+            System.out.println("Calle invalida");
+            return;
+        }
         this.laMatriz.nuevaCalle(calle.out, calle.in, calle.distance, this.roadsList);
         this.roadsList.addLast(calle);
     }
-    
     
     /**
      * cambia el atributo visitado de todos los nodos a false.
@@ -394,4 +395,30 @@ public class Grafo {
         this.resetVisitado();
         return outString;
     }
+
+    public ListI realizarPedido(ListI pedido, Warehouse almacen){
+        ListI envio = new ListI();
+        almacen.envios(pedido, envio);
+        if (pedido.empty()){
+            return envio;
+        } else {
+            Warehouse cercano = almacen.getNearest();
+            envio.juntar(this.realizarPedido(pedido, cercano));
+        }
+        return envio;
+    }
+    
+    public void agregarPedido(ListI pedido, String item, int cantidad){
+        Inventory nuevo = new Inventory(item, cantidad);
+        pedido.agregarItem(nuevo);
+    }
+    
+    public void agregarInventario(Warehouse almacen, String item, int cantidad){
+        almacen.agregarProducto(item, cantidad);
+    }
+    
+    public void descontarInventario(Warehouse almacen, String item, int cantidad){
+        
+    }
+
 }
