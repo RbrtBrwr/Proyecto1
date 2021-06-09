@@ -16,6 +16,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     String pedido; //String de concatenación de todos los productos y sus cantidades que escoja el usuario.
     String mensajes;
     String almacen;
+  
 
 
     /**
@@ -28,8 +29,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         initComponents();
         //Aquí se rellena todo
         this.menuInicial = menuInicial;
-        cbAlmacen.addItem("A");
-        cbAlmacen.addItem("B");
+        
+        
+        for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
+            cbAlmacen.addItem(menuInicial.miGrafo.warehouseList.getWarehouse(i).name);
+            System.out.println(menuInicial.miGrafo.warehouseList.getWarehouse(i).items.showNodes());
+        }
+
         cbProducto.addItem("Pantalla");
         cbProducto.addItem("Audífonos");
 
@@ -66,10 +72,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 70, -1));
+        jPanel3.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 90, -1));
 
         lblAlmacen.setText("Almacén");
-        jPanel3.add(lblAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+        jPanel3.add(lblAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
 
         lblProducto.setText("Producto");
         jPanel3.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
