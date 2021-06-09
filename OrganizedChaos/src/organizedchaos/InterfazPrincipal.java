@@ -29,15 +29,37 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         initComponents();
         //Aquí se rellena todo
         this.menuInicial = menuInicial;
+        ListMaker productos = new ListMaker(); //Se crea lista vacía para almacenar todos los productos sin repetición
         
         
         for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
+        //Este ciclo es para recorrer todos los Almacenes en el grafo e ir llenando las listas desplegables.
             cbAlmacen.addItem(menuInicial.miGrafo.warehouseList.getWarehouse(i).name);
-            System.out.println(menuInicial.miGrafo.warehouseList.getWarehouse(i).items.showNodes());
+            String[] productosAlmacen = menuInicial.miGrafo.warehouseList.getWarehouse(i).items.showNodesWithoutRepetition(); //Es un arreglo
+            for (int j = 0; j < productosAlmacen.length; j++) {
+            //En este ciclo se llena la lista de productos evitando repetición
+                if (productos.isEmpty()) {
+                    productos.addFirst(productosAlmacen[j]);
+                } else if (productos.find(productosAlmacen[j]) == -1) {
+                    productos.addFirst(productosAlmacen[j]);
+                    
+                    
+                } 
+         
+                
+            }
+        }
+        
+        for (int i = 0; i < productos.getSize(); i++) {
+        //Se llenan las listas desplegables a partir de la lista productos
+            cbProducto.addItem(productos.getName(i).toString());
+            
         }
 
-        cbProducto.addItem("Pantalla");
-        cbProducto.addItem("Audífonos");
+        
+        
+
+
 
 
         }
@@ -72,15 +94,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 90, -1));
+        jPanel3.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 130, -1));
 
         lblAlmacen.setText("Almacén");
-        jPanel3.add(lblAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, -1, -1));
+        jPanel3.add(lblAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
 
         lblProducto.setText("Producto");
-        jPanel3.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
+        jPanel3.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
 
-        jPanel3.add(cbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 70, -1));
+        jPanel3.add(cbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 100, -1));
 
         buttonAgregar.setText("Agregar");
         buttonAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,7 +110,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 buttonAgregarMouseClicked(evt);
             }
         });
-        jPanel3.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        jPanel3.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 100, -1));
 
         lblCantidad.setText("Su pedido");
         jPanel3.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
@@ -134,9 +156,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         //cbAlmacen.setEditable(false);
         cbAlmacen.disable();
-        System.out.println("\n\n\n\n\n\n\n\n\nCATATO");
-        menuInicial.miGrafo.mostrarMatriz();
-        System.out.println("\n\n\n\n\n\n\n\n\nCATATO");
         almacen = "Almacen seleccionado: "+cbAlmacen.getSelectedItem()+"\n\n";
         if (pedido == null) {
             producto = cbProducto.getSelectedItem().toString();
