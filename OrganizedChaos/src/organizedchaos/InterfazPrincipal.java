@@ -21,10 +21,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form InterfazPrincipal
      */
-    public InterfazPrincipal() {
+    
+    public static InterfazMenuInicial menuInicial; 
+            
+    public InterfazPrincipal(InterfazMenuInicial menuInicial) {
         initComponents();
         //Aquí se rellena todo
-
+        this.menuInicial = menuInicial;
         cbAlmacen.addItem("A");
         cbAlmacen.addItem("B");
         cbProducto.addItem("Pantalla");
@@ -116,16 +119,18 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void buttonRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRegresarMouseClicked
         // TODO add your handling code here:
-        InterfazMenuInicial menu = new InterfazMenuInicial();
-        menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
         this.setVisible(false);
+        menuInicial.setLocationRelativeTo(null);
+        menuInicial.setVisible(true);
     }//GEN-LAST:event_buttonRegresarMouseClicked
 
     private void buttonAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAgregarMouseClicked
         // TODO add your handling code here:
         //cbAlmacen.setEditable(false);
         cbAlmacen.disable();
+        System.out.println("\n\n\n\n\n\n\n\n\nCATATO");
+        menuInicial.miGrafo.mostrarMatriz();
+        System.out.println("\n\n\n\n\n\n\n\n\nCATATO");
         almacen = "Almacen seleccionado: "+cbAlmacen.getSelectedItem()+"\n\n";
         if (pedido == null) {
             producto = cbProducto.getSelectedItem().toString();
@@ -173,7 +178,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazPrincipal().setVisible(true);
+                new InterfazPrincipal(menuInicial).setVisible(true);
             }
         });
     }

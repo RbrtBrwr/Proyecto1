@@ -14,8 +14,12 @@ public class InterfazDijkstra extends javax.swing.JFrame {
     /**
      * Creates new form InterfazDijkstra
      */
-    public InterfazDijkstra() {
+    
+    public static InterfazMenuInicial menuInicial; 
+    
+    public InterfazDijkstra(InterfazMenuInicial menuInicial) {
         initComponents();
+        this.menuInicial = menuInicial;
     }
 
     /**
@@ -31,15 +35,36 @@ public class InterfazDijkstra extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
+        buttonDijkstra = new javax.swing.JButton();
+        buttonRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jRadioButton1.setText("Dijkstra");
+        jRadioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jRadioButton1MouseClicked(evt);
+            }
+        });
 
         jRadioButton2.setText("Floyd Warshall");
 
         jLabel1.setText("El almacén seleccionado no posee los productos requeridos. Seleccione el método mediante el cual desea solicitar productos a los demás almacenes.");
+
+        buttonDijkstra.setText("Dijkstra");
+        buttonDijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonDijkstraMouseClicked(evt);
+            }
+        });
+
+        buttonRegresar.setText("Regresar");
+        buttonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonRegresarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -48,31 +73,68 @@ public class InterfazDijkstra extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jRadioButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                .addComponent(buttonDijkstra))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(buttonRegresar)
+                                    .addComponent(jRadioButton2))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
-                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButton1)
+                        .addGap(32, 32, 32))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(buttonDijkstra)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)))
                 .addComponent(jRadioButton2)
-                .addGap(72, 72, 72))
+                .addGap(18, 18, 18)
+                .addComponent(buttonRegresar)
+                .addGap(31, 31, 31))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jRadioButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButton1MouseClicked
+        // TODO add your handling code here:
+        System.out.println("\n\n\nCATATO");
+        menuInicial.miGrafo.mostrarMatriz();
+        System.out.println("\n\n\nCATATO");
+    }//GEN-LAST:event_jRadioButton1MouseClicked
+
+    private void buttonDijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseClicked
+        // TODO add your handling code here:
+        System.out.println("\n\n\nCATATO");
+        menuInicial.miGrafo.mostrarMatriz();
+        System.out.println("\n\n\nCATATO");
+    }//GEN-LAST:event_buttonDijkstraMouseClicked
+
+    private void buttonRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRegresarMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        menuInicial.setLocationRelativeTo(null);
+        menuInicial.setVisible(true);
+        
+    }//GEN-LAST:event_buttonRegresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -104,12 +166,14 @@ public class InterfazDijkstra extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazDijkstra().setVisible(true);
+                new InterfazDijkstra(menuInicial).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonDijkstra;
+    private javax.swing.JButton buttonRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;

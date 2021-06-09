@@ -14,8 +14,11 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
     /**
      * Creates new form InterfazMenuInicial
      */
+    public static Grafo miGrafo = new Grafo(); //Cree un constructor de Grafo vacío para inicializar un grafo de manera Public Static
     public InterfazMenuInicial() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     /**
@@ -29,6 +32,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         buttonPedido = new javax.swing.JButton();
+        buttonDijkstra = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,7 +48,23 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
         });
         jPanel1.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
 
+        buttonDijkstra.setText("Dijkstra");
+        buttonDijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonDijkstraMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonDijkstraMouseEntered(evt);
+            }
+        });
+        jPanel1.add(buttonDijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazonWarehouse.jpg"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 360));
@@ -54,12 +74,29 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
 
     private void buttonPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPedidoMouseClicked
         // TODO add your handling code here:
-        InterfazPrincipal pedido = new InterfazPrincipal();
-        pedido.setLocationRelativeTo(null);
-        pedido.setVisible(true);
+        InterfazPrincipal realizarPedido = new InterfazPrincipal(this);
+        realizarPedido.setLocationRelativeTo(null);
+        realizarPedido.setVisible(true);
         this.setVisible(false);
 
     }//GEN-LAST:event_buttonPedidoMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void buttonDijkstraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonDijkstraMouseEntered
+
+    private void buttonDijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseClicked
+        // TODO add your handling code here:
+        InterfazDijkstra dijkstra = new InterfazDijkstra(this);
+        dijkstra.setLocationRelativeTo(null);
+        dijkstra.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_buttonDijkstraMouseClicked
 
     /**
      * @param args the command line arguments
@@ -94,9 +131,113 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 new InterfazMenuInicial().setVisible(true);
             }
         });
+        
+
+        //Llamamos a la clase para abrir y leer el archivo .txt.
+
+        Openertxt file = new Openertxt();
+        String[] separados;
+        
+        try{
+            separados = (file.read()).split(";");
+
+
+            //if (file.read() == null){System.exit(0);}
+            //Separo los datos del .txt en base a los ; que contenga.
+
+            //Llamamos a la clase para crear la lista de Almacenes y calles.
+            ListW warehouseList = new ListW();
+            ListS roadsList = new ListS();
+            //Creamos un ciclo For que recorra todos los elementos que se hayan guaradado despues del split en base al ;.
+            for (int i = 0; i < separados.length; i++) {
+                //Generamos un if para determinar si el elemento pertenece a los almacenes.
+                if (separados[i].contains("Almacen ")) {
+                    // Si pertenece a los almacenes vamos a separar su información en base a los : que contengan y asi separar el nombre del almacen de sus items.
+                    String[] warehouses = separados[i].split(":");
+                        //Creamos otra lista, pero esta va a ser los inventarios de cada almacen.
+                        ListI inventoryList = new ListI();
+                        //Declaramos la variable name que determinara el nombre del almacen que estemos recorriendo.
+                        String name = warehouses[0].replace("\n","");
+                        //Volvemos a separar, esta vez los items de cada almacen para tener su cantidad y nombre.
+                        String[] inventory = warehouses[1].split("\n");
+                        //Recorremos los items con sus debidas cantidades.
+                        for (int k = 1; k < inventory.length; k++) {
+                            //Separamos los items de sus cantidades en base a la , que tienen de por medio.
+                            String[] items = inventory[k].split(",");
+                            //Asignamos la variable item que contiene el nombre del item.
+                            String item = items[0];
+                            String numberString = items[1];
+                            //Asignamos la variable number que contiene el numero en formato entero de la cantidad del item.
+                            int number = Integer.parseInt(numberString);
+                            //Creamos un objeto que contenga el nombre y la cantidad de cada item.
+                            Inventory thing = new Inventory(item, number);
+                            //Agregamos ese objeto a la lista que sera el inventario de cada almacen.
+                            inventoryList.addLast(thing);
+                        }
+                        //prueba
+                        //inventoryList.showNodes();
+
+                        Warehouse warehouse = new Warehouse(name, inventoryList);
+                        warehouseList.addLast(warehouse);
+                } //Generamos un else if para determinar si el elemento pertenece a las Rutas.
+                else if (separados[i].contains("Rutas")) {
+                    String[] routs = separados[i + 1].split("\n");
+
+                    for (int j = 1; j < routs.length; j++) {
+                        String[] streets = routs[j].split(",");
+                        String warehouse1 = "Almacen " + streets[0];
+                        String warehouse2 = "Almacen " + streets[1];
+                        String distanceString = streets[2];
+                        int distance = Integer.parseInt(distanceString);
+                        Street roads = new Street(warehouse1, warehouse2, distance);
+                        roadsList.addLast(roads);
+                    }
+                }
+            }
+            
+
+        
+            
+            miGrafo = new Grafo(warehouseList, roadsList);
+            
+            InterfazMenuInicial menu = new InterfazMenuInicial(); //Creo interfaz con la lista de almacenes como parámetro
+            menu.setLocationRelativeTo(null);
+            menu.setVisible(true);
+
+            miGrafo.mostrarMatriz();
+
+
+            System.out.println(miGrafo.DFSTodo());
+            System.out.println(miGrafo.BFSTodo());
+            
+            System.out.println(miGrafo.BFSItem("ram"));
+            System.out.println(miGrafo.DFSItem("grafica"));
+            miGrafo.checkStreets();
+
+            Street nueva = new Street("Almacen E", "Almacen B", 12);
+            miGrafo.agregarCalle(nueva);
+
+            nueva = new Street("Almacen D", "Almacen D", 12);
+            miGrafo.agregarCalle(nueva);
+            miGrafo.mostrarMatriz();
+
+
+
+
+
+        
+        } catch (NullPointerException e){
+            System.exit(0);
+        }
+        
+        
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonDijkstra;
     private javax.swing.JButton buttonPedido;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

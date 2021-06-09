@@ -84,6 +84,7 @@ public class OrganizedChaos {
         
             
             Grafo miGrafo = new Grafo(warehouseList, roadsList);
+            
             InterfazMenuInicial menu = new InterfazMenuInicial(); //Creo interfaz con la lista de almacenes como parámetro
             menu.setLocationRelativeTo(null);
             menu.setVisible(true);
