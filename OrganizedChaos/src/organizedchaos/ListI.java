@@ -144,6 +144,19 @@ public class ListI{ //Lista para inventarios
         this.addLast(item);
     }
     
+    public void agregarItem(String nombre, int cantidad){
+        Inventory newItem = new Inventory(nombre, cantidad);
+        Nodo track = headI;
+        while (track != null){
+            if (nombre.equalsIgnoreCase(track.info.name)){
+                track.info.quantity += cantidad;
+                return;
+            }
+            track = track.sig;
+        }
+        this.addLast(newItem);
+    }
+    
     public void juntar(ListI segunda){
         Nodo track = segunda.headI;
         
@@ -151,5 +164,21 @@ public class ListI{ //Lista para inventarios
             this.agregarItem(track.info);
             track = track.sig;
         }
+    }
+    
+    public String guardarArchivo(){
+        String archivo = "";
+        Nodo track = headI;
+        while (track != null){
+            if (track.sig != null){
+                archivo += track.info.name + "," + track.info.quantity + "\n";
+                
+            } else {
+                archivo += track.info.name + "," + track.info.quantity;
+            }
+            track = track.sig;
+        }
+        archivo += ";\n";
+        return archivo;
     }
 }

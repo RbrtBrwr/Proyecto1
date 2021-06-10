@@ -20,11 +20,10 @@ public class OrganizedChaos {
 
         //Llamamos a la clase para abrir y leer el archivo .txt.
 
-        Openertxt file = new Openertxt();
         String[] separados;
         
         try{
-            separados = (file.read()).split(";");
+            separados = (Openertxt.read()).split(";");
 
 
             //if (file.read() == null){System.exit(0);}
@@ -85,27 +84,72 @@ public class OrganizedChaos {
             Grafo miGrafo = new Grafo(warehouseList, roadsList);
 
             miGrafo.mostrarMatriz();
-
-
-            System.out.println(miGrafo.DFSTodo());
-            System.out.println(miGrafo.BFSTodo());
-            
-            System.out.println(miGrafo.BFSItem("ram"));
-            System.out.println(miGrafo.DFSItem("grafica"));
-            miGrafo.checkStreets();
-
-            Street nueva = new Street("Almacen E", "Almacen B", 12);
-            miGrafo.agregarCalle(nueva);
-
-            nueva = new Street("Almacen D", "Almacen D", 12);
-            miGrafo.agregarCalle(nueva);
+//
+//
+//            System.out.println(miGrafo.DFSTodo());
+//            System.out.println(miGrafo.BFSTodo());
+//            
+//            System.out.println(miGrafo.BFSItem("ram"));
+//            System.out.println(miGrafo.DFSItem("grafica"));
+//            miGrafo.checkStreets();
+//            
+//            Warehouse almacen = new Warehouse("Almacen F", null);
+//            Street calle1 = new Street("Almacen F", "Almacen E", 2);
+//            Street calle2 = new Street("Almacen A", "Almacen F", 1);            
+//            miGrafo = miGrafo.agregarAlmacen(almacen, calle1, calle2);
+//            
+//            almacen = new Warehouse("Almacen G", null);
+//            calle1 = new Street("Almacen G", "Almacen A", 9);
+//            calle2 = new Street("Almacen C", "Almacen G", 7); 
+//            miGrafo = miGrafo.agregarAlmacen(almacen, calle1, calle2);
+//            
+//            almacen = new Warehouse("Almacen H", null);
+//            calle1 = new Street("Almacen H", "Almacen D", 4);
+//            calle2 = new Street("Almacen E", "Almacen H", 20); 
+//            miGrafo = miGrafo.agregarAlmacen(almacen, calle1, calle2);
+//            
+//            almacen = new Warehouse("Almacen I", null);
+//            calle1 = new Street("Almacen I", "Almacen B", 11);
+//            calle2 = new Street("Almacen B", "Almacen I", 2); 
+//            miGrafo = miGrafo.agregarAlmacen(almacen, calle1, calle2);
+//
+//            Street nueva = new Street("Almacen E", "Almacen B", 12);
+//            miGrafo.agregarCalle(nueva);
+//
+//            nueva = new Street("Almacen D", "Almacen D", 12);
+//            miGrafo.agregarCalle(nueva);
             miGrafo.mostrarMatriz();
+            
+            MatrizAdy prueba = miGrafo.FWtemp();
+            
+            prueba.muestraMatriz();
+            
+            ListI pedido = new ListI();
+            Inventory nuevo = new Inventory("Pantalla",1);
+            pedido.addLast(nuevo);
+            nuevo = new Inventory("ram",1);
+            pedido.addLast(nuevo);
+            nuevo = new Inventory("procesador",3);
+            pedido.addLast(nuevo);
+            nuevo = new Inventory("placa",1);
+            pedido.addLast(nuevo);
+            nuevo = new Inventory("teclado",1);
+            pedido.addLast(nuevo);
+            nuevo = new Inventory("microfono",1);
+            pedido.addLast(nuevo);
+            nuevo = new Inventory("audifonos",2);
+            pedido.addLast(nuevo);
+            
+            Warehouse almacen = miGrafo.warehouseList.getWarehouse(0);
 
-
-
-
-
-        
+            ListI pruebaenvio = miGrafo.realizarPedido(pedido, almacen, prueba.mAdy);
+            System.out.println(pruebaenvio.showNodes());
+//            
+//            String outText = miGrafo.paraGuardar();
+//            System.out.println(outText);
+//            
+//            Openertxt.write(outText);
+            
         } catch (NullPointerException e){
             System.exit(0);
         }

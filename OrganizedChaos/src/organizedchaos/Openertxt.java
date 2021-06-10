@@ -5,8 +5,10 @@
  */
 package organizedchaos;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -17,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Ignacio
  */
 public class Openertxt {
-    public String read() {
+    public static String read() {
         String text = "";
         Scanner entry = null;
         //Se crea el JFileChooser. Se le indica que la ventana se abra en el directorio actual                    
@@ -51,5 +53,33 @@ public class Openertxt {
             return null;
         }
         return text;
+    }
+    
+    public static void write(String escribir){
+        //Se crea el JFileChooser. Se le indica que la ventana se abra en el directorio actual                    
+        JFileChooser fileChooser = new JFileChooser(".");      
+        //Se crea el filtro. El primer parámetro es el mensaje que se muestra,
+        //El segundo es la extensión de los ficheros que se van a mostrar      
+        FileFilter filter = new FileNameExtensionFilter("Archivos de Texto (.txt)", "txt"); 
+        //Se le asigna al JFileChooser el filtro
+        fileChooser.setFileFilter(filter);
+        //Se muestra la ventana
+        int value = fileChooser.showOpenDialog(fileChooser);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            String route = fileChooser.getSelectedFile().getAbsolutePath();
+            try {
+
+                try (BufferedWriter writer = new BufferedWriter(new FileWriter(route))) {
+                    writer.write(escribir);
+                }
+                
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+
+            } 
+        } else {
+            System.out.println("No se ha seleccionado ningún fichero");
+            return;
+        }
     }
 }
