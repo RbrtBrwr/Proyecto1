@@ -35,7 +35,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
         //Este ciclo es para recorrer todos los Almacenes en el grafo e ir llenando las listas desplegables.
             cbAlmacen.addItem(menuInicial.miGrafo.warehouseList.getWarehouse(i).name);
-            String[] productosAlmacen = menuInicial.miGrafo.warehouseList.getWarehouse(i).items.showNodesWithoutRepetition(); //Es un arreglo
+            String[] productosAlmacen = menuInicial.miGrafo.warehouseList.getWarehouse(i).items.showNodesWithoutRepetition(); //ARREGLAR Es un arreglo
             for (int j = 0; j < productosAlmacen.length; j++) {
             //En este ciclo se llena la lista de productos evitando repetición
                 if (productos.isEmpty()) {
@@ -55,6 +55,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             cbProducto.addItem(productos.getName(i).toString());
             
         }
+        
+
 
         
         
@@ -113,7 +115,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jPanel3.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 100, -1));
 
         lblCantidad.setText("Su pedido");
-        jPanel3.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
+        jPanel3.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
         jPanel3.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 60, -1));
 
         buttonFuncionamiento.setText("Funcionamiento");
@@ -156,13 +158,16 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         //cbAlmacen.setEditable(false);
         cbAlmacen.disable();
-        almacen = "Almacen seleccionado: "+cbAlmacen.getSelectedItem()+"\n\n";
+        almacen = cbAlmacen.getSelectedItem().toString();
         if (pedido == null) {
             producto = cbProducto.getSelectedItem().toString();
             cantidad = txtCantidad.getText().toString();
             pedido = almacen+producto+": "+cantidad+"\n";
             txtPedido.setText(pedido);
-            cbProducto.removeItem(producto); //Se elimina de la caja desplegable el producto que acaba de ser seleccionado.            
+            cbProducto.removeItem(producto); //Se elimina de la caja desplegable el producto que acaba de ser seleccionado.
+            menuInicial.miGrafo = menuInicial.miGrafo.eliminarNodo(almacen);
+            System.out.println("SE ELIMINÓ B");
+            menuInicial.miGrafo.mostrarMatriz();
         } else {
             producto = cbProducto.getSelectedItem().toString();
             cantidad = txtCantidad.getText().toString();

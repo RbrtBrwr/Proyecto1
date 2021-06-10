@@ -33,6 +33,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonPedido = new javax.swing.JButton();
         buttonDijkstra = new javax.swing.JButton();
+        buttonEliminarAlmacen = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,6 +59,14 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
             }
         });
         jPanel1.add(buttonDijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
+
+        buttonEliminarAlmacen.setText("Eliminar Almacen");
+        buttonEliminarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonEliminarAlmacenMouseClicked(evt);
+            }
+        });
+        jPanel1.add(buttonEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazonWarehouse.jpg"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,6 +106,15 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
         this.setVisible(false);
         
     }//GEN-LAST:event_buttonDijkstraMouseClicked
+
+    private void buttonEliminarAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEliminarAlmacenMouseClicked
+        // TODO add your handling code here:
+        InterfazEliminarAlmacen eliminarAlmacen = new InterfazEliminarAlmacen(this);
+        eliminarAlmacen.setLocationRelativeTo(null);
+        eliminarAlmacen.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_buttonEliminarAlmacenMouseClicked
 
     /**
      * @param args the command line arguments
@@ -238,6 +256,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonDijkstra;
+    private javax.swing.JButton buttonEliminarAlmacen;
     private javax.swing.JButton buttonPedido;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
