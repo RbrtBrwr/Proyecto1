@@ -13,9 +13,10 @@ package organizedchaos;
 public class InterfazPrincipal extends javax.swing.JFrame {
     String producto; //Toma lo que ingrese el usuario en la caja desplegable de productos.
     String cantidad; //Toma el número que ingrese el usuario de la cantidad de productos escogidos deseada. 
-    String pedido; //String de concatenación de todos los productos y sus cantidades que escoja el usuario.
+    String stringPedido; //String de concatenación de todos los productos y las cantidades que escoja el usuario.
     String mensajes;
     String almacen;
+    ListI listaPedido; //Lista donde se almacenará el pedido que vaya a realizar el usuario
   
 
 
@@ -27,13 +28,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             
     public InterfazPrincipal(InterfazMenuInicial menuInicial) {
         initComponents();
-        //Aquí se rellena todo
+        //Aquí se rellena toda la interfaz
         this.menuInicial = menuInicial;
-        ListMaker productos = new ListMaker(); //Se crea lista vacía para almacenar todos los productos sin repetición
+        this.listaPedido = new ListI();
+        ListMaker productos = new ListMaker(); //Se crea lista vacía para almacenar todos los productos sin repetición a partir de la clase ListMaker
         
         
         for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
-        //Este ciclo es para recorrer todos los Almacenes en el grafo e ir llenando las listas desplegables.
+        //Este ciclo es para recorrer todos los Almacenes en el grafo e ir llenando las listas desplegables del a interfaz.
             cbAlmacen.addItem(menuInicial.miGrafo.warehouseList.getWarehouse(i).name);
             String[] productosAlmacen = menuInicial.miGrafo.warehouseList.getWarehouse(i).items.showNodesWithoutRepetition(); //ARREGLAR Es un arreglo
             for (int j = 0; j < productosAlmacen.length; j++) {
@@ -41,32 +43,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 if (productos.isEmpty()) {
                     productos.addFirst(productosAlmacen[j]);
                 } else if (productos.find(productosAlmacen[j]) == -1) {
-                    productos.addFirst(productosAlmacen[j]);
-                    
-                    
-                } 
-         
-                
+                    productos.addFirst(productosAlmacen[j]);  
+                }
             }
         }
         
         for (int i = 0; i < productos.getSize(); i++) {
         //Se llenan las listas desplegables a partir de la lista productos
-            cbProducto.addItem(productos.getName(i).toString());
-            
-        }
-        
-
-
-        
-        
-
-
-
-
+            cbProducto.addItem(productos.getName(i).toString());  
+            }
         }
     
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,6 +76,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         buttonRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPedido = new javax.swing.JTextArea();
+        buttonPedido = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -119,7 +107,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jPanel3.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 60, -1));
 
         buttonFuncionamiento.setText("Funcionamiento");
-        jPanel3.add(buttonFuncionamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
+        jPanel3.add(buttonFuncionamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, -1, -1));
 
         lblCantidad1.setText("Cantidad");
         jPanel3.add(lblCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
@@ -129,14 +117,25 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 buttonRegresarMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonRegresarMouseEntered(evt);
+            }
         });
-        jPanel3.add(buttonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+        jPanel3.add(buttonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
 
         txtPedido.setColumns(20);
         txtPedido.setRows(5);
         jScrollPane1.setViewportView(txtPedido);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, -1, 230));
+
+        buttonPedido.setText("Confirmar pedido");
+        buttonPedido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonPedidoMouseClicked(evt);
+            }
+        });
+        jPanel3.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazon (2).jpg"))); // NOI18N
         jLabel1.setText("fondo");
@@ -149,7 +148,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void buttonRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRegresarMouseClicked
         // TODO add your handling code here:
-        this.setVisible(false);
+        this.dispose(); //Tiene que hacerse dispose para que la próxima vez que se llame empiece desde cero
         menuInicial.setLocationRelativeTo(null);
         menuInicial.setVisible(true);
     }//GEN-LAST:event_buttonRegresarMouseClicked
@@ -159,24 +158,40 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         //cbAlmacen.setEditable(false);
         cbAlmacen.disable();
         almacen = cbAlmacen.getSelectedItem().toString();
-        if (pedido == null) {
+        
+        if (stringPedido == null) {
+            //La primera vez que el usuario le de al botón "agregar", el stringPedido siempre va a estar vacío y va a entrar aquí.
             producto = cbProducto.getSelectedItem().toString();
-            cantidad = txtCantidad.getText().toString();
-            pedido = almacen+producto+": "+cantidad+"\n";
-            txtPedido.setText(pedido);
+            cantidad = txtCantidad.getText().toString(); //Validar
+            Inventory  pedido = new Inventory(producto, Integer.parseInt(cantidad));
+            listaPedido.agregarItem(pedido);
+            stringPedido = almacen+"\n\n"+producto+": "+cantidad+"\n"; //Se llena stringPedido para mostrarlo en la Text Box.
+            txtPedido.setText(stringPedido);
             cbProducto.removeItem(producto); //Se elimina de la caja desplegable el producto que acaba de ser seleccionado.
-            menuInicial.miGrafo = menuInicial.miGrafo.eliminarNodo(almacen);
-            System.out.println("SE ELIMINÓ B");
-            menuInicial.miGrafo.mostrarMatriz();
+
         } else {
+            //Cuando el usuario agregue otro producto a su pedido, ya el stringPedido va a tener algo.
             producto = cbProducto.getSelectedItem().toString();
-            cantidad = txtCantidad.getText().toString();
-            pedido = pedido+producto+": "+cantidad+"\n";
-            txtPedido.setText(pedido);
+            cantidad = txtCantidad.getText().toString(); //Validar
+            Inventory  pedido = new Inventory(producto, Integer.parseInt(cantidad));
+            listaPedido.addLast(pedido);
+            
+            stringPedido = stringPedido+producto+": "+cantidad+"\n";
+            txtPedido.setText(stringPedido);
             cbProducto.removeItem(producto); //Se elimina de la caja desplegable el producto que acaba de ser seleccionado.            
             
         }
     }//GEN-LAST:event_buttonAgregarMouseClicked
+
+    private void buttonPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPedidoMouseClicked
+        // TODO add your handling code here:
+        System.out.println(listaPedido.showNodes());
+        stringPedido = null;
+    }//GEN-LAST:event_buttonPedidoMouseClicked
+
+    private void buttonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRegresarMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRegresarMouseEntered
 
     /**
      * @param args the command line arguments
@@ -216,6 +231,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgregar;
     private javax.swing.JButton buttonFuncionamiento;
+    private javax.swing.JButton buttonPedido;
     private javax.swing.JButton buttonRegresar;
     private javax.swing.JComboBox<String> cbAlmacen;
     private javax.swing.JComboBox<String> cbProducto;

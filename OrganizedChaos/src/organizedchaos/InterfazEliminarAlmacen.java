@@ -37,6 +37,7 @@ public class InterfazEliminarAlmacen extends javax.swing.JFrame {
         cbEliminarAlmacen = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         buttonEliminar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -46,10 +47,10 @@ public class InterfazEliminarAlmacen extends javax.swing.JFrame {
                 cbEliminarAlmacenActionPerformed(evt);
             }
         });
-        getContentPane().add(cbEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 100, -1));
+        getContentPane().add(cbEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 100, -1));
 
         jLabel1.setText("Almacén que desea eliminar");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
 
         buttonEliminar.setText("Eliminar");
         buttonEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -57,22 +58,22 @@ public class InterfazEliminarAlmacen extends javax.swing.JFrame {
                 buttonEliminarMouseClicked(evt);
             }
         });
-        getContentPane().add(buttonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, -1, -1));
+        getContentPane().add(buttonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbEliminarAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEliminarAlmacenActionPerformed
         // TODO add your handling code here:
-        almacen = cbEliminarAlmacen.getSelectedItem().toString();
-        menuInicial.miGrafo = menuInicial.miGrafo.eliminarNodo(almacen);
-        System.out.println("SE ELIMINÓ");
-        menuInicial.miGrafo.mostrarMatriz();
+
     }//GEN-LAST:event_cbEliminarAlmacenActionPerformed
 
     private void buttonEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEliminarMouseClicked
         // TODO add your handling code here:
-        
+        menuInicial.miGrafo = menuInicial.miGrafo.eliminarNodo(cbEliminarAlmacen.getSelectedItem().toString());
+        cbEliminarAlmacen.removeItem(cbEliminarAlmacen.getSelectedItem());
+        menuInicial.miGrafo.mostrarMatriz();
     }//GEN-LAST:event_buttonEliminarMouseClicked
 
     /**
@@ -114,5 +115,6 @@ public class InterfazEliminarAlmacen extends javax.swing.JFrame {
     private javax.swing.JButton buttonEliminar;
     private javax.swing.JComboBox<String> cbEliminarAlmacen;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
