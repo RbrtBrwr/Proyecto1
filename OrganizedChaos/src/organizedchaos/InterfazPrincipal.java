@@ -17,7 +17,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     String mensajes;
     String almacen;
     ListI listaPedido; //Lista donde se almacenará el pedido que vaya a realizar el usuario
-  
+    ListI matrizAlmacenes; //Lista que se usa para el Dijkstra CODIGO, DIST MIN DESDE INICIO, PREDECESOR, VISITADO.
 
 
     /**
@@ -187,6 +187,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println(listaPedido.showNodes());
         stringPedido = null;
+        for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
+            
+            
+        }
+        
+        
+        //Cuando se confirma el pedido el programa debe, en caso de no encontrar el pedido en stock, hacer el recorrido con Dijkstra o Floyd.
+        
+        
+        
+        
     }//GEN-LAST:event_buttonPedidoMouseClicked
 
     private void buttonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRegresarMouseEntered
