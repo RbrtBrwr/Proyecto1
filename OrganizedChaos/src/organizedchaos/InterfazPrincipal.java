@@ -201,8 +201,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             listaNodosDijkstra.addLast(pInfo);
         }
         
-        boolean verdadero = listaNodosDijkstra.quedanNodosSinVisitar();
+        boolean verdadero = listaNodosDijkstra.quedanAlmacenesSinVisitar();
         System.out.println(verdadero);
+        System.out.println(listaNodosDijkstra.getInfoAlmacen(3).nombreAlmacen);
         
         
         //Cuando se confirma el pedido el programa debe, en caso de no encontrar el pedido en stock, hacer el recorrido con Dijkstra o Floyd.
