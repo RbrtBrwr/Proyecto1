@@ -16,6 +16,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
      */
     public static Grafo miGrafo = new Grafo(); //Cree un constructor de Grafo vacío para inicializar un grafo de manera Public Static
     public static ListW warehouseList = new ListW();
+    public static ListI itemsList = new ListI();
     public InterfazMenuInicial() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -155,7 +156,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
         String[] separados;
         try{
             separados = (file.read()).split(";");
-            ListI itemsList = new ListI();
             //Llamamos a la clase para crear la lista de Almacenes y calles
             ListS roadsList = new ListS();
             //Creamos un ciclo For que recorra todos los elementos que se hayan guaradado despues del split en base al ;.

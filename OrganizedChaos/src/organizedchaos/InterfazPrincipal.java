@@ -5,6 +5,8 @@
  */
 package organizedchaos;
   
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -168,23 +170,31 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             //La primera vez que el usuario le de al botón "agregar", el stringPedido siempre va a estar vacío y va a entrar aquí.
             producto = cbProducto.getSelectedItem().toString();
             cantidad = txtCantidad.getText().toString(); //Validar
-            Inventory  pedido = new Inventory(producto, Integer.parseInt(cantidad));
+            if (menuInicial.itemsList.checkquantity(producto, Integer.parseInt(cantidad))){
+               Inventory  pedido = new Inventory(producto, Integer.parseInt(cantidad));
             listaPedido.agregarItem(pedido);
             stringPedido = almacen+"\n\n"+producto+": "+cantidad+"\n"; //Se llena stringPedido para mostrarlo en la Text Box.
             txtPedido.setText(stringPedido);
-            cbProducto.removeItem(producto); //Se elimina de la caja desplegable el producto que acaba de ser seleccionado.
+            cbProducto.removeItem(producto); //Se elimina de la caja desplegable el producto que acaba de ser seleccionado. 
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Los almacenes no cuentan con la cantidad suficiente del producto.");
+            }
 
         } else {
             //Cuando el usuario agregue otro producto a su pedido, ya el stringPedido va a tener algo.
             producto = cbProducto.getSelectedItem().toString();
             cantidad = txtCantidad.getText().toString(); //Validar
+             if (menuInicial.itemsList.checkquantity(producto, Integer.parseInt(cantidad))){
             Inventory  pedido = new Inventory(producto, Integer.parseInt(cantidad));
             listaPedido.addLast(pedido);
-            
             stringPedido = stringPedido+producto+": "+cantidad+"\n";
             txtPedido.setText(stringPedido);
             cbProducto.removeItem(producto); //Se elimina de la caja desplegable el producto que acaba de ser seleccionado.            
-            
+            }
+             else {
+                JOptionPane.showMessageDialog(null, "Los almacenes no cuentan con la cantidad suficiente del producto.");
+            }
         }
     }//GEN-LAST:event_buttonAgregarMouseClicked
 
