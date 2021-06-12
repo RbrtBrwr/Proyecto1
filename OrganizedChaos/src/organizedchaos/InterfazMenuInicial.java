@@ -232,11 +232,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
             System.out.println(miGrafo.DFSItem("grafica"));
             miGrafo.checkStreets();
 
-            Street nueva = new Street("Almacen E", "Almacen B", 12);
-            miGrafo.agregarCalle(nueva);
-
-            nueva = new Street("Almacen D", "Almacen D", 12);
-            miGrafo.agregarCalle(nueva);
             miGrafo.mostrarMatriz();
 
 

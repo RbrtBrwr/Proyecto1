@@ -30,7 +30,7 @@ public class ListDijkstra {
             return;
         }
         while (pAux != null){
-            System.out.println(pAux.pInfo.nombreAlmacen+"||"+pAux.pInfo.distMinimaInicio+"||"+pAux.pInfo.visitado);
+            System.out.println(pAux.pInfo.nombreAlmacen+"||"+pAux.pInfo.distMinimaInicio+"||"+pAux.pInfo.visitado+"||"+pAux.pInfo.predecesor);
             pAux = pAux.pNext;
         }
     }
@@ -75,12 +75,16 @@ public class ListDijkstra {
      */
     public boolean quedanAlmacenesSinVisitar(ListDijkstra this){
         NodoDijkstra pAuxDijkstra = pFirstDijkstra; //Nodo auxiliar
-        while (pAuxDijkstra.pNext != null){
-            System.out.println(pAuxDijkstra.pNext);
+        int contador = 1;
+        while (contador <= this.getSize()){
+            contador ++;
             if (pAuxDijkstra.pInfo.visitado == false) {
                 return true; //Si retorna verdadero todavía quedan Almacenes sin visitar (todavía hay alguno con visitado en falso)  
             } else {
-                pAuxDijkstra = pAuxDijkstra.pNext;  
+                if (pAuxDijkstra.pNext == null) { 
+                } else {
+                    pAuxDijkstra = pAuxDijkstra.pNext;  
+                }
             }
         } 
         return false;  //Ya se recorrieron todos los Almacenes
@@ -95,8 +99,10 @@ public class ListDijkstra {
         int menorDistancia = 999;
         int indiceAlmacenActual = 0; //Lo inicializamos en cero
         int index = -1;
+        int contador = 0;
         NodoDijkstra pAuxDijkstra = pFirstDijkstra;
-        while (pAuxDijkstra.pNext != null){
+        while (contador < this.getSize()){
+            contador ++;
             index++;
             if (pAuxDijkstra.pInfo.visitado == false) {
                 if (pAuxDijkstra.pInfo.distMinimaInicio <= menorDistancia) {
@@ -118,12 +124,6 @@ public class ListDijkstra {
         // !this.getInfoAlmacen(i).visitado es un booleano que valida que el almacen correspondiente a la iteración actual no haya sido visitado
         
         for (int i = 0; i < this.getSize(); i++) { //Se recorren las columnas de la fila correspondiente al Almacen actual en la Matriz de Adyacencia.
-//            System.out.println(miGrafo.laMatriz.mAdy[indiceAlmacenActual][i]);
-//            System.out.println(!this.getInfoAlmacen(i).visitado);
-//            System.out.println(this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i]);
-//            System.out.println(this.getInfoAlmacen(i).distMinimaInicio);
-//            System.out.println(sizeMatriz);
-//            System.out.println(this.getSize());
             if (miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] != -1 && !this.getInfoAlmacen(i).visitado && this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] < this.getInfoAlmacen(i).distMinimaInicio) {
                 this.getInfoAlmacen(i).distMinimaInicio = this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i];
                 this.getInfoAlmacen(i).predecesor = this.getInfoAlmacen(indiceAlmacenActual).nombreAlmacen; //Se cambia el predecesor

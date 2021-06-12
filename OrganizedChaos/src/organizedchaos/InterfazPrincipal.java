@@ -205,12 +205,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         
         //Tengo loop infinito aquí. Revisar esto.
         while (listaNodosDijkstra.quedanAlmacenesSinVisitar()){
-            System.out.println(listaNodosDijkstra.cantidadNoVisitados());
             int indiceAlmacenActual = listaNodosDijkstra.almacenMenorDistancia();
             listaNodosDijkstra.actualizarTabla(menuInicial.miGrafo, indiceAlmacenActual);
+            System.out.println("DIJKSTRA\n");
             listaNodosDijkstra.showNodes();
         }
-        menuInicial.miGrafo.laMatriz.muestraMatriz();
+        
+        
         
         
         
