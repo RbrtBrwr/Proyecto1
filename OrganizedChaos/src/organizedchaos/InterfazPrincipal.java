@@ -196,21 +196,19 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
             Dijkstra pInfo = new Dijkstra(menuInicial.miGrafo.warehouseList.getName(i));
             listaNodosDijkstra.addLast(pInfo);
-        }
-        
-        
+        } 
         //Dijkstra
-        System.out.println(listaNodosDijkstra.almacenMenorDistancia());
+        //El Almacen origen es el que ingresa el usuario en el cbBox
         String origen = cbAlmacen.getSelectedItem().toString();
         listaNodosDijkstra.getInfoAlmacen2(origen).distMinimaInicio = 0;
         listaNodosDijkstra.getInfoAlmacen2(origen).visitado = false;
-        int indiceAlmacenActual = -1;
         
         //Tengo loop infinito aquí. Revisar esto.
         while (listaNodosDijkstra.quedanAlmacenesSinVisitar()){
             System.out.println(listaNodosDijkstra.cantidadNoVisitados());
-            indiceAlmacenActual = listaNodosDijkstra.almacenMenorDistancia();
+            int indiceAlmacenActual = listaNodosDijkstra.almacenMenorDistancia();
             listaNodosDijkstra.actualizarTabla(menuInicial.miGrafo, indiceAlmacenActual);
+            listaNodosDijkstra.showNodes();
         }
         menuInicial.miGrafo.laMatriz.muestraMatriz();
         

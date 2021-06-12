@@ -30,7 +30,7 @@ public class ListDijkstra {
             return;
         }
         while (pAux != null){
-            System.out.println(pAux.pInfo.nombreAlmacen+pAux.pInfo.distMinimaInicio+pAux.pInfo.visitado);
+            System.out.println(pAux.pInfo.nombreAlmacen+"||"+pAux.pInfo.distMinimaInicio+"||"+pAux.pInfo.visitado);
             pAux = pAux.pNext;
         }
     }
@@ -93,7 +93,7 @@ public class ListDijkstra {
      */
     public int almacenMenorDistancia(ListDijkstra this){
         int menorDistancia = 999;
-        int indiceAlmacenActual = 0;
+        int indiceAlmacenActual = 0; //Lo inicializamos en cero
         int index = -1;
         NodoDijkstra pAuxDijkstra = pFirstDijkstra;
         while (pAuxDijkstra.pNext != null){
@@ -103,7 +103,7 @@ public class ListDijkstra {
                     menorDistancia = pAuxDijkstra.pInfo.distMinimaInicio;
                     indiceAlmacenActual = index;   
                 }
-            } return indiceAlmacenActual;
+            } pAuxDijkstra = pAuxDijkstra.pNext;
         } return indiceAlmacenActual;
     }
     
@@ -126,7 +126,7 @@ public class ListDijkstra {
 //            System.out.println(this.getSize());
             if (miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] != -1 && !this.getInfoAlmacen(i).visitado && this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] < this.getInfoAlmacen(i).distMinimaInicio) {
                 this.getInfoAlmacen(i).distMinimaInicio = this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i];
-                this.getInfoAlmacen(i).predecesor = this.getInfoAlmacen(indiceAlmacenActual).nombreAlmacen;
+                this.getInfoAlmacen(i).predecesor = this.getInfoAlmacen(indiceAlmacenActual).nombreAlmacen; //Se cambia el predecesor
             }  
             this.getInfoAlmacen(indiceAlmacenActual).visitado = true;    
         }
@@ -185,6 +185,8 @@ public class ListDijkstra {
             pAuxDijkstra = pAuxDijkstra.pNext;
         }
         return contador;
+    
         
+    
     }
 }
