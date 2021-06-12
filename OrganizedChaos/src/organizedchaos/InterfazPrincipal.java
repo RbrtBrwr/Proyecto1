@@ -205,6 +205,19 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         System.out.println(verdadero);
         System.out.println(listaNodosDijkstra.getInfoAlmacen(3).nombreAlmacen);
         
+        //Dijkstra
+        String origen = cbAlmacen.getSelectedItem().toString();
+        listaNodosDijkstra.getInfoAlmacen2(origen).distMinimaInicio = 0;
+        listaNodosDijkstra.getInfoAlmacen2(origen).visitado = false;
+        int indiceAlmacenActual = -1;
+        while (listaNodosDijkstra.quedanAlmacenesSinVisitar()){
+            indiceAlmacenActual = listaNodosDijkstra.almacenMenorDistancia();
+            listaNodosDijkstra.actualizarTabla(menuInicial.miGrafo, indiceAlmacenActual);
+        }
+        menuInicial.miGrafo.laMatriz.muestraMatriz();
+        
+        
+        
         
         //Cuando se confirma el pedido el programa debe, en caso de no encontrar el pedido en stock, hacer el recorrido con Dijkstra o Floyd.
         

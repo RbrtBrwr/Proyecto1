@@ -98,15 +98,15 @@ public class ListDijkstra {
      * @param miGrafo. El parámetro miGrafo se utiliza para acceder a la Matriz de Adyacencia que se encuentra dentro de grafo.
      * @param indiceAlmacenActual. Es el índice obtenido en la función nodoMenorDistancia y representa al Almacen más cercano al que estaba siendo recorrido. 
      */
-//    public void actualizarTabla(ListDijkstra this, Grafo miGrafo, int indiceAlmacenActual){
-//        for (int i = 0; i < miGrafo.laMatriz.mAdy[indiceAlmacenActual].length; i++) { //Se recorren las columnas de la fila correspondiente al Almacen actual en la Matriz de Adyacencia.
-//            if (miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] != -1) && ()  {
-//                
-//            }  
-//        }
-//             
-//        
-//    }
+    public void actualizarTabla(ListDijkstra this, Grafo miGrafo, int indiceAlmacenActual){
+        for (int i = 0; i < miGrafo.laMatriz.mAdy[indiceAlmacenActual].length; i++) { //Se recorren las columnas de la fila correspondiente al Almacen actual en la Matriz de Adyacencia.
+            if (miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] != -1 && !this.getInfoAlmacen(i).visitado && this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] < this.getInfoAlmacen(i).distMinimaInicio) {
+                this.getInfoAlmacen(i).distMinimaInicio = this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i];
+                this.getInfoAlmacen(i).predecesor = this.getInfoAlmacen(indiceAlmacenActual).nombreAlmacen;
+            }  
+            this.getInfoAlmacen(indiceAlmacenActual).visitado = true;    
+        }
+    }
     
     public Dijkstra getInfoAlmacen(int indiceAlmacenActual){
         NodoDijkstra pAuxDijkstra = pFirstDijkstra;
@@ -121,6 +121,21 @@ public class ListDijkstra {
             } 
             pAuxDijkstra = pAuxDijkstra.pNext;
             contador++;
+        }
+        return null;
+    }
+        
+    public Dijkstra getInfoAlmacen2(String nombreAlmacen){
+        NodoDijkstra pAuxDijkstra = pFirstDijkstra;
+        if (pAuxDijkstra == null) {
+            System.out.println("Lista vacía");
+            return null;
+        } 
+        while (pAuxDijkstra != null){
+            if (pAuxDijkstra.pInfo.nombreAlmacen == nombreAlmacen) {
+                return pAuxDijkstra.pInfo;
+            } 
+            pAuxDijkstra = pAuxDijkstra.pNext;
         }
         return null;
         
