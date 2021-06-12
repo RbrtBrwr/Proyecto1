@@ -80,4 +80,15 @@ public class ListS {
         
         System.out.println("Calle no existe");
     }
+    
+    public String guardarArchivo(){
+        String archivo = "Rutas;\n";
+        Nodo track = this.headS;
+        while (track != null){
+            archivo += track.info.out.replaceAll("Almacen ", "") + "," + track.info.in.replaceAll("Almacen ", "") + "," + track.info.distance + "\n";
+            track = track.sig;
+        }
+        return archivo;
+                
+    }
 }

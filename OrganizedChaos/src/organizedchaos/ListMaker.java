@@ -78,6 +78,8 @@ public class ListMaker {
         return " ";
     }
     
+    
+    
     public void remove(int info){
         Nodo track = head;
         Nodo anterior = null;
@@ -162,4 +164,9 @@ public class ListMaker {
         
         //System.out.println("Posicion invalida");
     }
+    
+
+    
+    
+
 }

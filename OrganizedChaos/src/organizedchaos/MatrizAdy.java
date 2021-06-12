@@ -29,6 +29,7 @@ public class MatrizAdy {
             }
         }
     }
+    
     /**
      * Retorna la posicion del almacen en la lista.
      * @param check
@@ -80,6 +81,7 @@ public class MatrizAdy {
         
     }
     
+    
     /**
      * Le pasamos una lista de almacenes para inicializar cada almacen
      * @param warehouseList 
@@ -129,6 +131,8 @@ public class MatrizAdy {
         }
     }
     
+    
+    
     /**
      * Recibe el nombre de los almacenes en cada borde del road, su longitud y la lista de calles del grafo.
      * @param almacen1
@@ -174,8 +178,5 @@ public class MatrizAdy {
         }
     }
     
-    public int getSize(){
-        return this.getSize();
-    }
     
 }

@@ -15,12 +15,18 @@ public class Grafo {
     ListW warehouseList;
     ListS roadsList;
     MatrizAdy laMatriz;
+    int size;
 
     /**
      * 
      * @param warehouseList lista de almacenes
      * @param roadsList  lista de calles
      */
+    
+    public Grafo(){
+        
+    }
+    
     public Grafo(ListW warehouseList, ListS roadsList){ //Lista que tenga nombre de almacen, inventario, y calles de salida
         this.warehouseList = warehouseList;
         this.roadsList = roadsList;
@@ -45,7 +51,7 @@ public class Grafo {
      * @param calle1 Calle que entra o sale, debe haber por lo menos una entrada y una salida, pero podemos inicializar con solo salidas o entradas y despues nos pedira la que falte.
      * @param calle2 
      */
-    public void agregarAlmacen(Warehouse almacen, Street calle1, Street calle2){
+    public Grafo agregarAlmacen(Warehouse almacen, Street calle1, Street calle2){
         switch (this.laMatriz.nuevoAlmacen(almacen)) {
             case 1:
                 System.out.println("Nodo ya existe");
@@ -54,12 +60,13 @@ public class Grafo {
                 System.out.println("Maximo de nodos alcanzados");
                 break;
             default:
-                this.laMatriz.nuevoAlmacen(almacen);
-                this.laMatriz.nuevaCalle(calle1.out, calle1.in, calle1.distance, this.roadsList);
-                this.laMatriz.nuevaCalle(calle2.out, calle2.in, calle2.distance, this.roadsList);
-                break;
+                this.warehouseList.addLast(almacen);
+                this.roadsList.addLast(calle2);
+                this.roadsList.addLast(calle1);
+                size ++;
+                return new Grafo(warehouseList, roadsList);
         }
-        
+        return null;
     }
     
     /**
@@ -92,6 +99,7 @@ public class Grafo {
      */
     public Grafo eliminarNodo(String nombreNodo){
         this.warehouseList.removeNode(nombreNodo);
+        size --;
         return new Grafo(this.warehouseList, this.roadsList);
     }
     
@@ -395,15 +403,51 @@ public class Grafo {
         this.resetVisitado();
         return outString;
     }
+    
+    public MatrizAdy FWtemp(){
+        MatrizAdy floydW = new MatrizAdy();
+        for (int e = 0; e < laMatriz.numAlmacenes; e++){
+            for (int f = 0; f < laMatriz.numAlmacenes; f++){
+                if (e == f){
+                    floydW.mAdy[e][f] = 0;
+                }
+                else if (laMatriz.mAdy[e][f] == -1){
+                    floydW.mAdy[e][f] = 999;
+                }
+                else {
+                    floydW.mAdy[e][f] = laMatriz.mAdy[e][f];
+                }
+            }
+        }
+        
+        for (int k = 0; k < laMatriz.numAlmacenes; k++){
+            for (int i = 0; i < laMatriz.numAlmacenes; i++){
+                for (int j = 0; j < laMatriz.numAlmacenes; j++){
+                    if (floydW.mAdy[i][j] > floydW.mAdy[i][k] + floydW.mAdy[k][j]){
+                        System.out.println(warehouseList.getName(i) + " - " + floydW.mAdy[i][k] + " -> " + warehouseList.getName(k) + " - " + floydW.mAdy[k][j] + " -> " + warehouseList.getName(j) + " = " + (floydW.mAdy[k][j] + floydW.mAdy[i][k]));
+                        floydW.mAdy[i][j] = floydW.mAdy[i][k] + floydW.mAdy[k][j];
+                    }
+                }
+            }
+        }
+        
+        floydW.almacenes = this.laMatriz.almacenes;
+        return floydW;
+    }
 
-    public ListI realizarPedido(ListI pedido, Warehouse almacen){
+    public ListI realizarPedido(ListI pedido, Warehouse almacen, FloydWarshallAlgorithm floyd){
+        int actual = almacen.getPosition();
         ListI envio = new ListI();
-        almacen.envios(pedido, envio);
+        envio = almacen.envios(pedido, envio);
         if (pedido.empty()){
             return envio;
         } else {
-            Warehouse cercano = almacen.getNearest();
-            envio.juntar(this.realizarPedido(pedido, cercano));
+            Warehouse cercano = warehouseList.getWarehouse(almacen.getNearest(floyd.getPathMatrix(), warehouseList.getSize()));
+            envio.juntar(this.realizarPedido(pedido, cercano, floyd));
+            VisitedWarehousesList listW = floyd.showPath(actual, almacen.getNearest(floyd.getPathMatrix(), warehouseList.getSize()));
+            for (int i = 0; i < listW.getSize(); i++) {
+                System.out.println(listW.getInfo(i).info);
+            }
         }
         return envio;
     }
@@ -419,6 +463,13 @@ public class Grafo {
     
     public void descontarInventario(Warehouse almacen, String item, int cantidad){
         
+    }
+    
+    public String paraGuardar(){
+        String almacenes = this.warehouseList.guardarArchivo();
+        String rutas = this.roadsList.guardarArchivo();
+        String archivo = almacenes + rutas;
+        return archivo;
     }
 
 }

@@ -151,4 +151,31 @@ public class ListW {
         }
     }
     
+    public String guardarArchivo(){
+        String archivo= "Almacenes;\n";
+        NodoW track = headW;
+        while (track != null){
+            archivo += track.info.name + ":\n";
+            
+            if (track.info.items != null){
+                archivo += track.info.items.guardarArchivo();
+            }
+            
+            track = track.sig;
+        }
+        return archivo;
+    }
+    
+    public Warehouse getWarehouse(String name){
+        NodoW track = headW;
+        while (track.sig != null){
+            if (track.info.name.equalsIgnoreCase(name)){
+                return track.info;
+            }
+            else{
+                track = track.sig;
+            }
+        }
+        return null;
+    }
 }

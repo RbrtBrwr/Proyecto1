@@ -20,12 +20,11 @@ public class OrganizedChaos {
 
         //Llamamos a la clase para abrir y leer el archivo .txt.
 
-        Openertxt file = new Openertxt();
         String[] separados;
         
         try{
-            separados = (file.read()).split(";");
-
+            separados = (Openertxt.read()).split(";");
+            ListI itemsList = new ListI();
 
             //if (file.read() == null){System.exit(0);}
             //Separo los datos del .txt en base a los ; que contenga.
@@ -58,6 +57,7 @@ public class OrganizedChaos {
                             Inventory thing = new Inventory(item, number);
                             //Agregamos ese objeto a la lista que sera el inventario de cada almacen.
                             inventoryList.addLast(thing);
+                            itemsList.addLast(thing);
                         }
                         //prueba
                         //inventoryList.showNodes();
@@ -79,26 +79,9 @@ public class OrganizedChaos {
                     }
                 }
             }
-            
-        
-        
-            Grafo miGrafo = new Grafo(warehouseList, roadsList);
-
-            miGrafo.mostrarMatriz();
-
-            System.out.println(miGrafo.DFSTodo());
-            System.out.println(miGrafo.BFSTodo());
-            
-            System.out.println(miGrafo.BFSItem("ram"));
-            System.out.println(miGrafo.DFSItem("grafica"));
-            miGrafo.checkStreets();
-
-            Street nueva = new Street("Almacen E", "Almacen B", 12);
-            miGrafo.agregarCalle(nueva);
-
-            nueva = new Street("Almacen D", "Almacen D", 12);
-            miGrafo.agregarCalle(nueva);
-            miGrafo.mostrarMatriz();
+            InterfazMenuInicial menu = new InterfazMenuInicial(); //Creo interfaz con la lista de almacenes como parámetro
+            menu.setLocationRelativeTo(null);
+            menu.setVisible(true);
             
         } catch (NullPointerException e){
             System.exit(0);
@@ -106,3 +89,4 @@ public class OrganizedChaos {
         
     }
 }
+

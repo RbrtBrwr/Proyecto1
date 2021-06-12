@@ -118,10 +118,7 @@ public class Warehouse {
     
     public boolean buscarProducto(Inventory producto){
         Inventory encontrado = this.items.buscarItem(producto.name);
-        if (encontrado != null){
-            return true;
-        }
-        return false;
+        return encontrado != null;
     }
     
     /**
@@ -155,22 +152,36 @@ public class Warehouse {
         }
     }
     
-    public void envios(ListI pedido, ListI envio){
+    public ListI envios(ListI pedido, ListI envio){
         ListI.Nodo track = pedido.headI;
         while(track != null){
             if (this.buscarProducto(track.info)){
+                envio.agregarItem(track.info.name, track.info.quantity);
                 pedido.descontar(track.info);
-                this.items.descontar(track.info);
-                envio.agregarItem(track.info);
+                //this.items.descontar(track.info);
+                
             }
             track = track.sig;
         }
+        return envio;
     }
     
-    public Warehouse getNearest(){
-        //Aqui trabajo djikstra o floyd warshall
-        return null;
+    public int getNearest(int[][] floyd, int numAlmacenes){
+        int este = this.numAlmacen;
+        int cercano = -1;
+        int distanciaMin = 999;
+        
+        for (int i = 0; i < numAlmacenes; i++){
+            if (floyd[i][este] < distanciaMin && floyd[i][este] != 0){
+                cercano = i;
+                distanciaMin = floyd[i][este];
+            }
+        }
+        return cercano;
     }
     
+    public int getPosition(){
+        return numAlmacen;
+    }
     
 }
