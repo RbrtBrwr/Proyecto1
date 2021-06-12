@@ -190,27 +190,25 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     private void buttonPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPedidoMouseClicked
         // TODO add your handling code here:
-        System.out.println(listaPedido.showNodes());
         stringPedido = null;
-        System.out.println(listaNodosDijkstra.isEmpty());
         
         //Se llena la lista inicial del Dijkstra
         for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
-            System.out.println("Entro");
             Dijkstra pInfo = new Dijkstra(menuInicial.miGrafo.warehouseList.getName(i));
             listaNodosDijkstra.addLast(pInfo);
         }
         
-        boolean verdadero = listaNodosDijkstra.quedanAlmacenesSinVisitar();
-        System.out.println(verdadero);
-        System.out.println(listaNodosDijkstra.getInfoAlmacen(3).nombreAlmacen);
         
         //Dijkstra
+        System.out.println(listaNodosDijkstra.almacenMenorDistancia());
         String origen = cbAlmacen.getSelectedItem().toString();
         listaNodosDijkstra.getInfoAlmacen2(origen).distMinimaInicio = 0;
         listaNodosDijkstra.getInfoAlmacen2(origen).visitado = false;
         int indiceAlmacenActual = -1;
+        
+        //Tengo loop infinito aquí. Revisar esto.
         while (listaNodosDijkstra.quedanAlmacenesSinVisitar()){
+            System.out.println(listaNodosDijkstra.cantidadNoVisitados());
             indiceAlmacenActual = listaNodosDijkstra.almacenMenorDistancia();
             listaNodosDijkstra.actualizarTabla(menuInicial.miGrafo, indiceAlmacenActual);
         }

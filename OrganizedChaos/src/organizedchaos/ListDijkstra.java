@@ -10,6 +10,16 @@ package organizedchaos;
  * @author CATATO
  */
 public class ListDijkstra {
+    class NodoDijkstra {
+        Dijkstra pInfo;
+        NodoDijkstra pNext;
+
+
+        public NodoDijkstra(Dijkstra pInfo) {
+            this.pInfo = pInfo;
+            this.pNext = null;
+        }
+    }
     NodoDijkstra pFirstDijkstra = null;
     NodoDijkstra pLastDijkstra = null;
 
@@ -66,10 +76,14 @@ public class ListDijkstra {
     public boolean quedanAlmacenesSinVisitar(ListDijkstra this){
         NodoDijkstra pAuxDijkstra = pFirstDijkstra; //Nodo auxiliar
         while (pAuxDijkstra.pNext != null){
-            if (pAuxDijkstra.pInfo.visitado == false) { 
+            System.out.println(pAuxDijkstra.pNext);
+            if (pAuxDijkstra.pInfo.visitado == false) {
                 return true; //Si retorna verdadero todavía quedan Almacenes sin visitar (todavía hay alguno con visitado en falso)  
-            } 
-        } return false;  //Ya se recorrieron todos los Almacenes
+            } else {
+                pAuxDijkstra = pAuxDijkstra.pNext;  
+            }
+        } 
+        return false;  //Ya se recorrieron todos los Almacenes
     }
     
     /**
@@ -89,7 +103,7 @@ public class ListDijkstra {
                     menorDistancia = pAuxDijkstra.pInfo.distMinimaInicio;
                     indiceAlmacenActual = index;   
                 }
-            }
+            } return indiceAlmacenActual;
         } return indiceAlmacenActual;
     }
     
@@ -99,7 +113,17 @@ public class ListDijkstra {
      * @param indiceAlmacenActual. Es el índice obtenido en la función nodoMenorDistancia y representa al Almacen más cercano al que estaba siendo recorrido. 
      */
     public void actualizarTabla(ListDijkstra this, Grafo miGrafo, int indiceAlmacenActual){
-        for (int i = 0; i < miGrafo.laMatriz.mAdy[indiceAlmacenActual].length; i++) { //Se recorren las columnas de la fila correspondiente al Almacen actual en la Matriz de Adyacencia.
+        int sizeMatriz = miGrafo.laMatriz.mAdy[indiceAlmacenActual].length;
+        // miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] son las columnas de la fila correspondiente al Almacen actual
+        // !this.getInfoAlmacen(i).visitado es un booleano que valida que el almacen correspondiente a la iteración actual no haya sido visitado
+        
+        for (int i = 0; i < this.getSize(); i++) { //Se recorren las columnas de la fila correspondiente al Almacen actual en la Matriz de Adyacencia.
+//            System.out.println(miGrafo.laMatriz.mAdy[indiceAlmacenActual][i]);
+//            System.out.println(!this.getInfoAlmacen(i).visitado);
+//            System.out.println(this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i]);
+//            System.out.println(this.getInfoAlmacen(i).distMinimaInicio);
+//            System.out.println(sizeMatriz);
+//            System.out.println(this.getSize());
             if (miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] != -1 && !this.getInfoAlmacen(i).visitado && this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i] < this.getInfoAlmacen(i).distMinimaInicio) {
                 this.getInfoAlmacen(i).distMinimaInicio = this.getInfoAlmacen(indiceAlmacenActual).distMinimaInicio + miGrafo.laMatriz.mAdy[indiceAlmacenActual][i];
                 this.getInfoAlmacen(i).predecesor = this.getInfoAlmacen(indiceAlmacenActual).nombreAlmacen;
@@ -149,5 +173,18 @@ public class ListDijkstra {
             contador ++;
         }
         return contador;
-    }   
+    }
+    
+    public int cantidadNoVisitados(){
+        NodoDijkstra pAuxDijkstra = pFirstDijkstra;
+        int contador = 0;
+        while (pAuxDijkstra != null){
+            if (!pAuxDijkstra.pInfo.visitado) {
+                contador ++;  
+            }
+            pAuxDijkstra = pAuxDijkstra.pNext;
+        }
+        return contador;
+        
+    }
 }

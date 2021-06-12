@@ -10,17 +10,17 @@ package organizedchaos;
  * @author CATATO
  */
 
-public class NodoDijkstra {
-    Dijkstra pInfo;
-    NodoDijkstra pNext;
-
-
-    public NodoDijkstra(Dijkstra pInfo) {
-        this.pInfo = pInfo;
-        this.pNext = null;
-    }
-}
-    
+//public class NodoDijkstra {
+//    Dijkstra pInfo;
+//    NodoDijkstra pNext;
+//
+//
+//    public NodoDijkstra(Dijkstra pInfo) {
+//        this.pInfo = pInfo;
+//        this.pNext = null;
+//    }
+//}
+//    
     
     
     
