@@ -11,20 +11,15 @@ package organizedchaos;
  */
 
 public class NodoDijkstra {
-    String nombreAlmacen; //Almacena el nombre del almacen
-    Integer distMinimaInicio; //Se inicializa la distancia en 999
-    String predecesor; //Guarda la información del nodo padre
-    Boolean visitado; //Para verificar si está o no visitado
-    NodoDijkstra siguiente; //Siguiente nodo en la lista
+    Dijkstra pInfo;
+    NodoDijkstra pNext;
 
 
-    public NodoDijkstra(String nombreAlmacen) {
-        this.nombreAlmacen = nombreAlmacen;
-        this.distMinimaInicio = 999;
-        this.predecesor = "";
-        this.visitado = false;
-        this.siguiente = null;
+    public NodoDijkstra(Dijkstra pInfo) {
+        this.pInfo = pInfo;
+        this.pNext = null;
     }
+}
     
     
     
@@ -33,4 +28,4 @@ public class NodoDijkstra {
       
 
     
-}
+

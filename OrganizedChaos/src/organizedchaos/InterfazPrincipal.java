@@ -18,6 +18,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     String almacen;
     ListI listaPedido; //Lista donde se almacenará el pedido que vaya a realizar el usuario
     ListI matrizAlmacenes; //Lista que se usa para el Dijkstra CODIGO, DIST MIN DESDE INICIO, PREDECESOR, VISITADO.
+    ListDijkstra listaNodosDijkstra;
 
 
     /**
@@ -31,6 +32,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         //Aquí se rellena toda la interfaz
         this.menuInicial = menuInicial;
         this.listaPedido = new ListI();
+        this.listaNodosDijkstra = new ListDijkstra();
         ListMaker productos = new ListMaker(); //Se crea lista vacía para almacenar todos los productos sin repetición a partir de la clase ListMaker
         
         
@@ -52,6 +54,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         //Se llenan las listas desplegables a partir de la lista productos
             cbProducto.addItem(productos.getName(i).toString());  
             }
+        
+
+        
+        
         }
     
     /**
@@ -158,7 +164,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         //cbAlmacen.setEditable(false);
         cbAlmacen.disable();
         almacen = cbAlmacen.getSelectedItem().toString();
-        
         if (stringPedido == null) {
             //La primera vez que el usuario le de al botón "agregar", el stringPedido siempre va a estar vacío y va a entrar aquí.
             producto = cbProducto.getSelectedItem().toString();
@@ -187,10 +192,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println(listaPedido.showNodes());
         stringPedido = null;
+        System.out.println(listaNodosDijkstra.isEmpty());
+        
+        //Se llena la lista inicial del Dijkstra
         for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
-            
-            
+            System.out.println("Entro");
+            Dijkstra pInfo = new Dijkstra(menuInicial.miGrafo.warehouseList.getName(i));
+            listaNodosDijkstra.addLast(pInfo);
         }
+        
+        boolean verdadero = listaNodosDijkstra.quedanNodosSinVisitar();
+        System.out.println(verdadero);
         
         
         //Cuando se confirma el pedido el programa debe, en caso de no encontrar el pedido en stock, hacer el recorrido con Dijkstra o Floyd.
