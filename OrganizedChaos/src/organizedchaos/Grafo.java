@@ -21,6 +21,11 @@ public class Grafo {
      * @param warehouseList lista de almacenes
      * @param roadsList  lista de calles
      */
+    
+    public Grafo(){
+        
+    }
+    
     public Grafo(ListW warehouseList, ListS roadsList){ //Lista que tenga nombre de almacen, inventario, y calles de salida
         this.warehouseList = warehouseList;
         this.roadsList = roadsList;

@@ -30,6 +30,24 @@ public class ListI{ //Lista para inventarios
      * Muestra la informacion de los nodos en la lista.
      * @return outString String con el inventario
      */
+    
+    public String[] showNodesWithoutRepetition(){ //Lista para tener todo acceso al inventario disponible
+        Nodo track = headI;
+        String outString = "";
+        if (track == null) {
+            System.out.println("Lista vacia");
+            return null;
+        }
+        while (track != null){
+            outString += track.info.name+"\n";
+            track = track.sig;
+        }
+        
+        String[] inventario = outString.split("\n"); 
+        
+        return inventario;
+    }
+    
     public String showNodes(){ 
         Nodo track = headI;
         String outString = "";
