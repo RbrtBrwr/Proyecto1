@@ -6,6 +6,8 @@
 package organizedchaos;
   
 import javax.swing.JOptionPane;
+import static organizedchaos.InterfazMenuInicial.miGrafo;
+import static organizedchaos.InterfazMenuInicial.warehouseList;
 
 
 /**
@@ -203,9 +205,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         
         //if (){
             Warehouse warehouseName = menuInicial.warehouseList.getWarehouse(almacen);
-            FloydWarshallAlgorithm pathMatrix = new FloydWarshallAlgorithm();
-            pathMatrix.createPathMatrix(menuInicial.miGrafo, menuInicial.miGrafo.size);
-            menuInicial.miGrafo.realizarPedido(listaPedido, warehouseName, pathMatrix);
+            FloydWarshallAlgorithm pathMatrix = new FloydWarshallAlgorithm(menuInicial.miGrafo, menuInicial.warehouseList.getSize());
+            int [][] matrix = pathMatrix.getPathMatrix();
+            ListI envio = menuInicial.miGrafo.realizarPedido(listaPedido, warehouseName, matrix);
+            String envioString = "";
+            for (int i = 0; i < envio.size; i++) {
+                envioString += envio.getNode(i).info.name + ": " + envio.getNode(i).info.quantity + "\n";
+            }
+            JOptionPane.showMessageDialog(null, "Su pedido se ha realizado exitosamente: \n" + envioString);
         //}
         //else {
             stringPedido = null;

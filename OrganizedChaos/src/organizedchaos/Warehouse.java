@@ -106,16 +106,6 @@ public class Warehouse {
         return outString;
     }
     
-//    public String buscarProducto(Inventory producto){
-//        String outString = "";
-//        Inventory encontrado = this.items.buscarItem(producto.name);
-//        if (encontrado != null){
-//            outString += "Inventario " + this.name + ":\n";
-//            outString += encontrado.name + ": " + encontrado.quantity + "\n";
-//        }
-//        return outString;
-//    }
-    
     public boolean buscarProducto(Inventory producto){
         Inventory encontrado = this.items.buscarItem(producto.name);
         return encontrado != null;
@@ -169,8 +159,7 @@ public class Warehouse {
     public int getNearest(int[][] floyd, int numAlmacenes){
         int este = this.numAlmacen;
         int cercano = -1;
-        int distanciaMin = 999;
-        
+        int distanciaMin = 999;  
         for (int i = 0; i < numAlmacenes; i++){
             if (floyd[i][este] < distanciaMin && floyd[i][este] != 0){
                 cercano = i;

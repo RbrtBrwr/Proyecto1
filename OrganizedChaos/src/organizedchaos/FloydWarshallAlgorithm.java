@@ -17,11 +17,17 @@ public class FloydWarshallAlgorithm {
     int a;
     int b;
     
-    public void createPathMatrix (Grafo miGrafo, int size){
-        weightMatrix = miGrafo.laMatriz.mAdy;
-        vertixNumber = size;
-        pathMatrix = new int [vertixNumber][vertixNumber];
-        shortPath = new int [vertixNumber][vertixNumber];
+    public FloydWarshallAlgorithm(){
+        
+    }
+    public FloydWarshallAlgorithm (Grafo miGrafo, int size){
+        this.weightMatrix = miGrafo.laMatriz.mAdy;
+        this.vertixNumber = size;
+        this.pathMatrix = new int [vertixNumber][vertixNumber];
+        this.shortPath = new int [vertixNumber][vertixNumber];
+    }
+    
+    public void createPathMatrix (){
         for (int j = 0; j < vertixNumber; j++) {
             for (int k = 0; k < vertixNumber; k++) {
                 shortPath [j][k] = k;

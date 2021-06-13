@@ -435,19 +435,14 @@ public class Grafo {
         return floydW;
     }
 
-    public ListI realizarPedido(ListI pedido, Warehouse almacen, FloydWarshallAlgorithm floyd){
-        int actual = almacen.getPosition();
+    public ListI realizarPedido(ListI pedido, Warehouse almacen, int [][] floyd){
         ListI envio = new ListI();
         envio = almacen.envios(pedido, envio);
         if (pedido.empty()){
             return envio;
         } else {
-            Warehouse cercano = warehouseList.getWarehouse(almacen.getNearest(floyd.getPathMatrix(), warehouseList.getSize()));
+            Warehouse cercano = warehouseList.getWarehouse(almacen.getNearest(floyd, warehouseList.getSize()));
             envio.juntar(this.realizarPedido(pedido, cercano, floyd));
-            VisitedWarehousesList listW = floyd.showPath(actual, almacen.getNearest(floyd.getPathMatrix(), warehouseList.getSize()));
-            for (int i = 0; i < listW.getSize(); i++) {
-                System.out.println(listW.getInfo(i).info);
-            }
         }
         return envio;
     }
@@ -470,6 +465,22 @@ public class Grafo {
         String rutas = this.roadsList.guardarArchivo();
         String archivo = almacenes + rutas;
         return archivo;
+    }
+
+    public ListI makeOrder(ListI pedido, Warehouse almacen, FloydWarshallAlgorithm floyd ){
+        ListI envio = new ListI();
+        int i = 0;
+        while (i < pedido.size){
+            for (int j = 0; j < almacen.items.size; j++) {
+                if (pedido.getNode(i).info.name.equalsIgnoreCase(almacen.items.getNode(j).info.name)){
+                    if (pedido.getNode(i).info.quantity <= almacen.items.getNode(j).info.quantity){
+                        envio.addLast(pedido.getNode(i).info);
+                    }
+                }
+            }
+            i++;
+        }
+        return envio;   
     }
 
 }
