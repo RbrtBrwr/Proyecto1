@@ -86,6 +86,19 @@ public class ListW {
         return null;
     }
     
+    public Warehouse getWarehouse(String name){
+        NodoW track = headW;
+        while (track.sig != null){
+            if (track.info.name.equalsIgnoreCase(name)){
+                return track.info;
+            }
+            else{
+                track = track.sig;
+            }
+        }
+        return null;
+    }
+    
     /**
      * Retorna la posicion del warehouse indicado
      * @param check
