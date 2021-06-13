@@ -192,7 +192,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 }
             }
             miGrafo = new Grafo(warehouseList, roadsList);
-            itemsList.group();
             InterfazMenuInicial menu = new InterfazMenuInicial(); //Creo interfaz con la lista de almacenes como parámetro
             menu.setLocationRelativeTo(null);
             menu.setVisible(true);

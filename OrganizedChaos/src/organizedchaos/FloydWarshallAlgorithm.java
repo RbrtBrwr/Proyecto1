@@ -64,7 +64,7 @@ public class FloydWarshallAlgorithm {
     }
     public VisitedWarehousesList showPath(int wareHouse1, int wareHouse2){
         VisitedWarehousesList list = new VisitedWarehousesList();
-        while((shortPath [wareHouse1][wareHouse2] != -1)){
+        while((wareHouse1 != wareHouse2)){
            int first = shortPath [wareHouse1][wareHouse2]; 
            list.addFirst(first);
            wareHouse1 = first;

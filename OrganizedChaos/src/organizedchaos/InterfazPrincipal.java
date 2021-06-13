@@ -190,6 +190,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         //cbAlmacen.setEditable(false);
         cbAlmacen.disable();
         almacen = cbAlmacen.getSelectedItem().toString();
+        menuInicial.itemsList.group();
         if (stringPedido == null) {
             //La primera vez que el usuario le de al botón "agregar", el stringPedido siempre va a estar vacío y va a entrar aquí.
             producto = cbProducto.getSelectedItem().toString();
@@ -229,7 +230,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             Warehouse warehouseName = menuInicial.warehouseList.getWarehouse(almacen);
             FloydWarshallAlgorithm pathMatrix = new FloydWarshallAlgorithm(menuInicial.miGrafo, menuInicial.warehouseList.getSize());
             int [][] matrix = pathMatrix.getPathMatrix();
-            ListI envio = menuInicial.miGrafo.realizarPedido(listaPedido, warehouseName, matrix);
+            ListI envio = menuInicial.miGrafo.realizarPedido(listaPedido, warehouseName, pathMatrix, menuInicial.itemsList);
             String envioString = "";
             for (int i = 0; i < envio.size; i++) {
                 envioString += envio.getNode(i).info.name + ": " + envio.getNode(i).info.quantity + "\n";

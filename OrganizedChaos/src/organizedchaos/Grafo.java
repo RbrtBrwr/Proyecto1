@@ -5,6 +5,8 @@
  */
 package organizedchaos;
 
+import javax.swing.JOptionPane;
+
 
 /**
  *Clase de grafo, contiene las listas de almacenes y calles, y la matriz de adyacencia.
@@ -435,14 +437,25 @@ public class Grafo {
         return floydW;
     }
 
-    public ListI realizarPedido(ListI pedido, Warehouse almacen, int [][] floyd){
+    public ListI realizarPedido(ListI pedido, Warehouse almacen, FloydWarshallAlgorithm floyd, ListI itemsList){
         ListI envio = new ListI();
-        envio = almacen.envios(pedido, envio);
+        envio = almacen.envios(pedido, envio, itemsList);
         if (pedido.empty()){
             return envio;
         } else {
-            Warehouse cercano = warehouseList.getWarehouse(almacen.getNearest(floyd, warehouseList.getSize()));
-            envio.juntar(this.realizarPedido(pedido, cercano, floyd));
+            Warehouse cercano = warehouseList.getWarehouse(almacen.getNearest(floyd.getPathMatrix(), warehouseList.getSize()));
+            VisitedWarehousesList path = floyd.showPath(almacen.numAlmacen, cercano.numAlmacen);
+            String pathW = "";
+            for (int i = 0; i < path.getSize(); i++) {
+                pathW += path.getInfo(i).info + " <==== ";
+            }
+            pathW = pathW.replace("0", "A");
+            pathW = pathW.replace("1", "B");
+            pathW = pathW.replace("2", "C");
+            pathW = pathW.replace("3", "D");
+            pathW = pathW.replace("4", "E");
+            JOptionPane.showMessageDialog(null, "Se visitaron los siguientes almacenes para completar su pedido: \n" + pathW + almacen.name.replace("Almacen ", "") );
+            envio.juntar(this.realizarPedido(pedido, cercano, floyd, itemsList));
         }
         return envio;
     }
@@ -454,10 +467,6 @@ public class Grafo {
     
     public void agregarInventario(Warehouse almacen, String item, int cantidad){
         almacen.agregarProducto(item, cantidad);
-    }
-    
-    public void descontarInventario(Warehouse almacen, String item, int cantidad){
-        
     }
     
     public String paraGuardar(){

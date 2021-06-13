@@ -142,12 +142,13 @@ public class Warehouse {
         }
     }
     
-    public ListI envios(ListI pedido, ListI envio){
+    public ListI envios(ListI pedido, ListI envio, ListI itemsList){
         ListI.Nodo track = pedido.headI;
         while(track != null){
             if (this.buscarProducto(track.info)){
                 envio.agregarItem(track.info.name, track.info.quantity);
                 pedido.descontar(track.info);
+                itemsList.descontar(track.info);
                 //this.items.descontar(track.info);
                 
             }
