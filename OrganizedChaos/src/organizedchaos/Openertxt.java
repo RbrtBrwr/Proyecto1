@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -49,7 +50,7 @@ public class Openertxt {
                 }
             }
         } else {
-            System.out.println("No se ha seleccionado ningún fichero");
+            JOptionPane.showMessageDialog(null, "Erro al guardar los cambios.");
             return null;
         }
         return text;

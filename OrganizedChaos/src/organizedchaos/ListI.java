@@ -31,7 +31,6 @@ public class ListI{ //Lista para inventarios
      * Muestra la informacion de los nodos en la lista.
      * @return outString String con el inventario
      */
-    
     public String[] showNodesWithoutRepetition(){ //Lista para tener todo acceso al inventario disponible
         Nodo track = headI;
         String outString = "";
@@ -49,6 +48,10 @@ public class ListI{ //Lista para inventarios
         return inventario;
     }
     
+        /**
+     *Retorna un String con la lista de los items en el inventario.
+     * @return
+     */
     public String showNodes(){ 
         Nodo track = headI;
         String outString = "";
@@ -95,7 +98,12 @@ public class ListI{ //Lista para inventarios
         }
         return null;
     }
-    
+   
+        /**
+     *Elimina un item.
+     * @param item
+     * @return
+     */
     public void eliminarItem(Inventory item){
         Nodo track = headI.sig;
         Nodo pasado = headI;
@@ -115,6 +123,12 @@ public class ListI{ //Lista para inventarios
         }
     }
     
+    /**
+     *Descuenta del inventario la cantidad del item deseado.
+     * @param item
+     * @param cantidad
+     * @return
+     */
     public void descontar(String item, int cantidad){
         Nodo track = headI;
         while (track != null){
@@ -134,6 +148,11 @@ public class ListI{ //Lista para inventarios
         }
     }
     
+     /**
+     *Descuenta del inventario el item deseado.
+     * @param producto
+     * @return
+     */
     public void descontar(Inventory producto){
         String item = producto.name;
         int cantidad = producto.quantity;
@@ -155,6 +174,11 @@ public class ListI{ //Lista para inventarios
         }
     }
     
+     /**
+     *Agrega un item al inventario.
+     * @param item
+     * @return
+     */
     public void agregarItem(Inventory item){
         Nodo track = headI;
         while (track != null){
@@ -167,6 +191,12 @@ public class ListI{ //Lista para inventarios
         this.addLast(item);
     }
     
+    /**                             
+     *Agrega al inventario el item junto con su cantidad.
+     * @param nombre
+     * @param cantidad
+     * @return
+     */
     public void agregarItem(String nombre, int cantidad){
         Inventory newItem = new Inventory(nombre, cantidad);
         Nodo track = headI;
@@ -180,6 +210,11 @@ public class ListI{ //Lista para inventarios
         this.addLast(newItem);
     }
     
+    /**                             
+     *
+     * @param segunda
+     * @return
+     */
     public void juntar(ListI segunda){
         Nodo track = segunda.headI;
         
@@ -189,6 +224,10 @@ public class ListI{ //Lista para inventarios
         }
     }
     
+    /**                             
+     *Guarda todos los cambios que sufrio el archivo durante la corrida del programa.
+     * @return
+     */
     public String guardarArchivo(){
         String archivo = "";
         Nodo track = headI;
@@ -205,6 +244,11 @@ public class ListI{ //Lista para inventarios
         return archivo;
     }
     
+    /**                             
+     *retorna el nodo en la poscion deseada.
+     * @param index
+     * @return
+     */
     public Nodo getNode (int index){
         Nodo track = headI;
         int counter = 0;
@@ -214,7 +258,11 @@ public class ListI{ //Lista para inventarios
         }
         return track;
     }
-        
+    
+    /**                             
+     *Agrupa los items y suma sus cantidades para que no se repitan en la lista.
+     * @return
+     */
     public void group(){
         Nodo guide;
         Nodo tracker;
@@ -229,7 +277,13 @@ public class ListI{ //Lista para inventarios
             }
         }
     }    
-    
+   
+    /**                             
+     *Verifica que la cantidad solicitada del item este disponible.
+     * @param name
+     * @param number
+     * @return
+     */
     public Boolean checkquantity(String name, int number){
         if (this.buscarItem(name).quantity < number){
             return false;

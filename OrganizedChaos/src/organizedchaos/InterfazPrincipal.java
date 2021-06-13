@@ -148,6 +148,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 buttonPedidoMouseClicked(evt);
             }
         });
+        buttonPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPedidoActionPerformed(evt);
+            }
+        });
         jPanel3.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
 
         BFS.setText("BFS");
@@ -258,6 +263,14 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 System.out.println("DIJKSTRA\n");
                 listaNodosDijkstra.showNodes();
             }
+            for (int i = 0; i < listaPedido.size; i++) {
+                ListW inW = new ListW();
+                VisitedWarehousesList shortP = new VisitedWarehousesList();
+                inW = inW.getWarehouses(listaPedido.getNode(i).info.name, warehouseList);
+                for (int j = 0; j < inW.getSize(); j++) {
+                    shortP.addLast(listaNodosDijkstra.getInfoAlmacen2(inW.getName(j)).distMinimaInicio);
+                }
+            }
         //}
         
         
@@ -284,6 +297,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, menuInicial.miGrafo.BFSTodo());
     }//GEN-LAST:event_BFSActionPerformed
+
+    private void buttonPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonPedidoActionPerformed
 
     /**
      * @param args the command line arguments

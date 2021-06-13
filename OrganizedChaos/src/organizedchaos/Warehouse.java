@@ -106,6 +106,11 @@ public class Warehouse {
         return outString;
     }
     
+    /**                             
+     *Retorna si el producto se encuentra en la lista.
+     * @param producto
+     * @return
+     */
     public boolean buscarProducto(Inventory producto){
         Inventory encontrado = this.items.buscarItem(producto.name);
         return encontrado != null;
@@ -162,6 +167,12 @@ public class Warehouse {
         return envio;
     }
     
+    /**                             
+     *Encuentra el almacen mas cercano en base al algoritmo de FloydWarshall.
+     * @param floyd
+     * @param numAlmacenes
+     * @return
+     */
     public int getNearest(int[][] floyd, int numAlmacenes){
         int este = this.numAlmacen;
         int cercano = -1;

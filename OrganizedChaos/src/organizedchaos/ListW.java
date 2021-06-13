@@ -150,7 +150,11 @@ public class ListW {
             track = track.sig;
         }
     }
-    
+
+    /**
+     *Guarda los cambios sufridos en las listas del programa.
+     * @return
+     */    
     public String guardarArchivo(){
         String archivo= "Almacenes;\n";
         NodoW track = headW;
@@ -166,6 +170,11 @@ public class ListW {
         return archivo;
     }
     
+    /**
+     *Retorna el almacen completo.
+     * @param name
+     * @return
+     */    
     public Warehouse getWarehouse(String name){
         NodoW track = headW;
         while (track.sig != null){
@@ -177,5 +186,23 @@ public class ListW {
             }
         }
         return null;
+    }
+
+    /**
+     *Retorna los almacenes que contienen el item que se le pasa como parametro.
+     * @param item
+     * @param warehouseList
+     * @return
+     */
+    public ListW getWarehouses(String item, ListW warehouseList){
+        ListW warehouses = new ListW();
+        for (int j = 0; j < warehouseList.getSize(); j++) {
+            for (int k = 0; k < warehouseList.getWarehouse(j).items.size; k++) {
+                if (warehouseList.getWarehouse(j).items.getNode(k).info.name.equalsIgnoreCase(item)){
+                    warehouses.addLast(warehouseList.getWarehouse(j));
+                }
+            }
+        }
+        return warehouses;
     }
 }

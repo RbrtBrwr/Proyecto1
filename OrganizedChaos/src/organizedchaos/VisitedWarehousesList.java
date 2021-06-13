@@ -171,4 +171,16 @@ public class VisitedWarehousesList {
         }
         
     }
+    
+    public int getMinimum(){
+        Nodo tracker1 = head;
+        int smallest = 999999;
+        for (int i = 0; i < this.getSize(); i++) {
+            if (tracker1.info < smallest){
+                smallest = tracker1.info;
+            }
+            tracker1 = tracker1.sig;
+        }
+        return 0;
+    }
 }
