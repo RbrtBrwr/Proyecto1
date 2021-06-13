@@ -6,8 +6,6 @@
 package organizedchaos;
   
 import javax.swing.JOptionPane;
-import static organizedchaos.InterfazMenuInicial.miGrafo;
-import static organizedchaos.InterfazMenuInicial.warehouseList;
 
 
 /**
@@ -38,7 +36,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.listaPedido = new ListI();
         this.listaNodosDijkstra = new ListDijkstra();
         ListMaker productos = new ListMaker(); //Se crea lista vacía para almacenar todos los productos sin repetición a partir de la clase ListMaker
-        
+        cbAlgoritmo.addItem("Dijkstra");
+        cbAlgoritmo.addItem("Floyd-Warshall");
         
         for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
         //Este ciclo es para recorrer todos los Almacenes en el grafo e ir llenando las listas desplegables del a interfaz.
@@ -58,10 +57,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         //Se llenan las listas desplegables a partir de la lista productos
             cbProducto.addItem(productos.getName(i).toString());  
             }
-        
-
-        
-        
         }
     
     /**
@@ -73,6 +68,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         cbAlmacen = new javax.swing.JComboBox<>();
         lblAlmacen = new javax.swing.JLabel();
@@ -87,8 +84,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPedido = new javax.swing.JTextArea();
         buttonPedido = new javax.swing.JButton();
-        BFS = new javax.swing.JButton();
-        DFS = new javax.swing.JButton();
+        cbAlgoritmo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -97,15 +93,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 130, -1));
+        jPanel3.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 100, -1));
 
         lblAlmacen.setText("Almacén");
-        jPanel3.add(lblAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
+        jPanel3.add(lblAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
 
         lblProducto.setText("Producto");
-        jPanel3.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, -1, -1));
+        jPanel3.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
 
-        jPanel3.add(cbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 110, -1));
+        jPanel3.add(cbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 100, -1));
 
         buttonAgregar.setText("Agregar");
         buttonAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,17 +109,22 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 buttonAgregarMouseClicked(evt);
             }
         });
-        jPanel3.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 100, -1));
+        jPanel3.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 100, -1));
 
         lblCantidad.setText("Su pedido");
         jPanel3.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
         jPanel3.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 100, -1));
 
         buttonFuncionamiento.setText("Funcionamiento");
+        buttonFuncionamiento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonFuncionamientoMouseClicked(evt);
+            }
+        });
         jPanel3.add(buttonFuncionamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, -1, -1));
 
         lblCantidad1.setText("Cantidad");
-        jPanel3.add(lblCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
+        jPanel3.add(lblCantidad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
 
         buttonRegresar.setText("Regresar");
         buttonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -155,27 +156,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         jPanel3.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
 
-        BFS.setText("BFS");
-        BFS.addActionListener(new java.awt.event.ActionListener() {
+        cbAlgoritmo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BFSActionPerformed(evt);
+                cbAlgoritmoActionPerformed(evt);
             }
         });
-        jPanel3.add(BFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+        jPanel3.add(cbAlgoritmo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 90, -1));
 
-        DFS.setText("DFS");
-        DFS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DFSActionPerformed(evt);
-            }
-        });
-        jPanel3.add(DFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
-
-        jLabel2.setText("Mostrar inventario a través de:");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+        jLabel2.setText("Algoritmo");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazon (2).jpg"))); // NOI18N
-        jLabel1.setText("fondo");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 400));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 400));
@@ -266,41 +257,29 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             for (int i = 0; i < listaPedido.size; i++) {
                 ListW inW = new ListW();
                 VisitedWarehousesList shortP = new VisitedWarehousesList();
-                inW = inW.getWarehouses(listaPedido.getNode(i).info.name, warehouseList);
+                inW = inW.getWarehouses(listaPedido.getNode(i).info.name, menuInicial.warehouseList);
                 for (int j = 0; j < inW.getSize(); j++) {
                     shortP.addLast(listaNodosDijkstra.getInfoAlmacen2(inW.getName(j)).distMinimaInicio);
                 }
             }
-        //}
-        
-        
-        
-        
-        
-        //Cuando se confirma el pedido el programa debe, en caso de no encontrar el pedido en stock, hacer el recorrido con Dijkstra o Floyd.
-        
-        
-        
-        
     }//GEN-LAST:event_buttonPedidoMouseClicked
 
     private void buttonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRegresarMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonRegresarMouseEntered
 
-    private void DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSActionPerformed
+    private void buttonFuncionamientoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonFuncionamientoMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, menuInicial.miGrafo.DFSTodo());
-    }//GEN-LAST:event_DFSActionPerformed
-
-    private void BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSActionPerformed
-        // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, menuInicial.miGrafo.BFSTodo());
-    }//GEN-LAST:event_BFSActionPerformed
+        JOptionPane.showMessageDialog(null, "Hola, gracias por confiar en Amazon! \n\n1. En la primera casilla desplegable debes seleccionar el algoritmo de búsqueda de tu preferencia.\n2. En la segunda, el almacén desde el cual realizas el pedido.\n3. En la tercera casilla selecciona uno de los productos que deseas adquirir.\n4. Una vez seleccionado el producto, indica la cantidad de elementos que deseas de dicho producto.\n5. Para agregar otro producto presiona el botón 'Agregar' e ingresa tantos productos como desees.\n\nPara confirmar tu pedido presiona el botón 'Confirmar pedido'.   ");
+    }//GEN-LAST:event_buttonFuncionamientoMouseClicked
 
     private void buttonPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPedidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonPedidoActionPerformed
+
+    private void cbAlgoritmoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlgoritmoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAlgoritmoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -338,12 +317,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BFS;
-    private javax.swing.JButton DFS;
     private javax.swing.JButton buttonAgregar;
     private javax.swing.JButton buttonFuncionamiento;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton buttonPedido;
     private javax.swing.JButton buttonRegresar;
+    private javax.swing.JComboBox<String> cbAlgoritmo;
     private javax.swing.JComboBox<String> cbAlmacen;
     private javax.swing.JComboBox<String> cbProducto;
     private javax.swing.JLabel jLabel1;

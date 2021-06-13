@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package organizedchaos;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author CATATO
@@ -34,23 +34,15 @@ public class InterfazEliminarAlmacen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        buttonEliminar = new javax.swing.JButton();
         cbEliminarAlmacen = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        buttonEliminar = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cbEliminarAlmacen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbEliminarAlmacenActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cbEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 100, -1));
-
-        jLabel1.setText("Almacén que desea eliminar");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, -1));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonEliminar.setText("Eliminar");
         buttonEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -58,8 +50,19 @@ public class InterfazEliminarAlmacen extends javax.swing.JFrame {
                 buttonEliminarMouseClicked(evt);
             }
         });
-        getContentPane().add(buttonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, -1));
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 220, 160));
+        jPanel1.add(buttonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+
+        cbEliminarAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEliminarAlmacenActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 110, -1));
+
+        jLabel1.setText("Almacén que desea eliminar");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 220, 160));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

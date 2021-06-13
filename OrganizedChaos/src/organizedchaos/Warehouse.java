@@ -163,6 +163,7 @@ public class Warehouse {
      * @return
      */
     public ListI envios(ListI pedido, ListI envio, ListI itemsList){
+
         ListI.Nodo track = pedido.headI;
         while(track != null){
             if (this.buscarProducto(track.info)){
@@ -170,7 +171,6 @@ public class Warehouse {
                 this.descontar(track.info);
                 pedido.descontar(track.info);
                 itemsList.descontar(track.info);
-                //this.items.descontar(track.info);
                 
             }
             track = track.sig;
@@ -203,6 +203,5 @@ public class Warehouse {
      */
     public int getPosition(){
         return numAlmacen;
-    }
-    
+    }    
 }

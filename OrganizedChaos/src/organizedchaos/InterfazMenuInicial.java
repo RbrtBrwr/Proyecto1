@@ -23,7 +23,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
     public InterfazMenuInicial() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
     }
 
     /**
@@ -37,8 +36,9 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         buttonPedido = new javax.swing.JButton();
+        buttonDijkstra = new javax.swing.JButton();
+        buttonAgregarAlmacen = new javax.swing.JButton();
         buttonEliminarAlmacen = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,7 +52,26 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 buttonPedidoMouseClicked(evt);
             }
         });
-        jPanel1.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, -1, -1));
+        jPanel1.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
+
+        buttonDijkstra.setText("Dijkstra");
+        buttonDijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonDijkstraMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                buttonDijkstraMouseEntered(evt);
+            }
+        });
+        jPanel1.add(buttonDijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
+
+        buttonAgregarAlmacen.setText("Agregar Almacen");
+        buttonAgregarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonAgregarAlmacenMouseClicked(evt);
+            }
+        });
+        jPanel1.add(buttonAgregarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         buttonEliminarAlmacen.setText("Eliminar Almacen");
         buttonEliminarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -60,15 +79,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 buttonEliminarAlmacenMouseClicked(evt);
             }
         });
-        jPanel1.add(buttonEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
-
-        jButton1.setText("Guardar todo los cambios");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
+        jPanel1.add(buttonEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazonWarehouse.jpg"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,6 +106,29 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void buttonDijkstraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonDijkstraMouseEntered
+
+    private void buttonDijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseClicked
+        // TODO add your handling code here:
+        InterfazDijkstra dijkstra = new InterfazDijkstra(this);
+        dijkstra.setLocationRelativeTo(null);
+        dijkstra.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_buttonDijkstraMouseClicked
+
+    private void buttonAgregarAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAgregarAlmacenMouseClicked
+        // TODO add your handling code here:
+        InterfazAgregarAlmacen agregarAlmacen = new InterfazAgregarAlmacen(this);
+        agregarAlmacen.setLocationRelativeTo(null);
+        agregarAlmacen.setVisible(true);
+        this.setVisible(false);
+        
+        
+    }//GEN-LAST:event_buttonAgregarAlmacenMouseClicked
 
     private void buttonEliminarAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEliminarAlmacenMouseClicked
         // TODO add your handling code here:
@@ -145,7 +179,13 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
             }
         });
         //Llamamos a la clase para abrir y leer el archivo .txt.
+        InterfazMenuInicial menu = new InterfazMenuInicial(); //Creo interfaz con la lista de almacenes como parámetro
+        menu.setLocationRelativeTo(null);
+        menu.setVisible(true);
+
+        Openertxt file = new Openertxt();
         String[] separados;
+        
         try{
             separados = (file.read()).split(";");
             //Llamamos a la clase para crear la lista de Almacenes y calles
@@ -195,18 +235,16 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 }
             }
             miGrafo = new Grafo(warehouseList, roadsList);
-            InterfazMenuInicial menu = new InterfazMenuInicial(); //Creo interfaz con la lista de almacenes como parámetro
-            menu.setLocationRelativeTo(null);
-            menu.setVisible(true);
         } catch (NullPointerException e){
             System.exit(0);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonAgregarAlmacen;
+    private javax.swing.JButton buttonDijkstra;
     private javax.swing.JButton buttonEliminarAlmacen;
     private javax.swing.JButton buttonPedido;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

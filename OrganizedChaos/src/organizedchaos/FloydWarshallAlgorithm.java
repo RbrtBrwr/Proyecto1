@@ -17,9 +17,8 @@ public class FloydWarshallAlgorithm {
     int a;
     int b;
     
-    public FloydWarshallAlgorithm(){
-        
-    }
+
+
     public FloydWarshallAlgorithm (Grafo miGrafo, int size){
         this.weightMatrix = miGrafo.laMatriz.mAdy;
         this.vertixNumber = size;
@@ -31,6 +30,7 @@ public class FloydWarshallAlgorithm {
     * Genera la matriz de distancias minimas y de caminos.
     */
     public void createPathMatrix (){
+
         for (int j = 0; j < vertixNumber; j++) {
             for (int k = 0; k < vertixNumber; k++) {
                 shortPath [j][k] = k;
@@ -98,4 +98,5 @@ public class FloydWarshallAlgorithm {
         this.createPathMatrix();
         return pathMatrix;
     }
+
 }

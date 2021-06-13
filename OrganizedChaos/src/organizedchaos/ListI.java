@@ -9,7 +9,8 @@ package organizedchaos;
  * Lista de Inventario
  * @author Robert
  */
-public class ListI{ //Lista para inventarios
+public class ListI{ 
+//Lista para inventarios
     protected class Nodo{
         Inventory info;
         Nodo sig;
@@ -120,6 +121,7 @@ public class ListI{ //Lista para inventarios
             pasado = track;
             track = track.sig;
             size --;
+
         }
     }
     
@@ -243,6 +245,7 @@ public class ListI{ //Lista para inventarios
         archivo += ";\n";
         return archivo;
     }
+
     
     /**                             
      *retorna el nodo en la poscion deseada.
@@ -292,5 +295,4 @@ public class ListI{ //Lista para inventarios
             return true;
         } 
     }
-    
 }
