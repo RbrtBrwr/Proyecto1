@@ -467,20 +467,4 @@ public class Grafo {
         return archivo;
     }
 
-    public ListI makeOrder(ListI pedido, Warehouse almacen, FloydWarshallAlgorithm floyd ){
-        ListI envio = new ListI();
-        int i = 0;
-        while (i < pedido.size){
-            for (int j = 0; j < almacen.items.size; j++) {
-                if (pedido.getNode(i).info.name.equalsIgnoreCase(almacen.items.getNode(j).info.name)){
-                    if (pedido.getNode(i).info.quantity <= almacen.items.getNode(j).info.quantity){
-                        envio.addLast(pedido.getNode(i).info);
-                    }
-                }
-            }
-            i++;
-        }
-        return envio;   
-    }
-
 }

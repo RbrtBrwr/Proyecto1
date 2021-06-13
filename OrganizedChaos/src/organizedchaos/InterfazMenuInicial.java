@@ -17,6 +17,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
     public static Grafo miGrafo = new Grafo(); //Cree un constructor de Grafo vacío para inicializar un grafo de manera Public Static
     public static ListW warehouseList = new ListW();
     public static ListI itemsList = new ListI();
+    public static Openertxt file = new Openertxt();
     public InterfazMenuInicial() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -35,6 +36,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         buttonPedido = new javax.swing.JButton();
         buttonEliminarAlmacen = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -48,7 +50,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 buttonPedidoMouseClicked(evt);
             }
         });
-        jPanel1.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
+        jPanel1.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, -1, -1));
 
         buttonEliminarAlmacen.setText("Eliminar Almacen");
         buttonEliminarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -57,6 +59,14 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
             }
         });
         jPanel1.add(buttonEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+
+        jButton1.setText("Guardar todo los cambios");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazonWarehouse.jpg"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,6 +103,11 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
         
     }//GEN-LAST:event_buttonEliminarAlmacenMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String newFile = miGrafo.paraGuardar();
+        file.write(newFile);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -127,7 +142,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
             }
         });
         //Llamamos a la clase para abrir y leer el archivo .txt.
-        Openertxt file = new Openertxt();
         String[] separados;
         try{
             separados = (file.read()).split(";");
@@ -178,6 +192,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 }
             }
             miGrafo = new Grafo(warehouseList, roadsList);
+            itemsList.group();
             InterfazMenuInicial menu = new InterfazMenuInicial(); //Creo interfaz con la lista de almacenes como parámetro
             menu.setLocationRelativeTo(null);
             menu.setVisible(true);
@@ -189,6 +204,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEliminarAlmacen;
     private javax.swing.JButton buttonPedido;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
