@@ -87,6 +87,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtPedido = new javax.swing.JTextArea();
         buttonPedido = new javax.swing.JButton();
+        BFS = new javax.swing.JButton();
+        DFS = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,12 +100,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jPanel3.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 130, -1));
 
         lblAlmacen.setText("Almacén");
-        jPanel3.add(lblAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, -1, -1));
+        jPanel3.add(lblAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
 
         lblProducto.setText("Producto");
-        jPanel3.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+        jPanel3.add(lblProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, -1, -1));
 
-        jPanel3.add(cbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 100, -1));
+        jPanel3.add(cbProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 110, -1));
 
         buttonAgregar.setText("Agregar");
         buttonAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -110,11 +113,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 buttonAgregarMouseClicked(evt);
             }
         });
-        jPanel3.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 100, -1));
+        jPanel3.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 100, -1));
 
         lblCantidad.setText("Su pedido");
         jPanel3.add(lblCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
-        jPanel3.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 60, -1));
+        jPanel3.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 100, -1));
 
         buttonFuncionamiento.setText("Funcionamiento");
         jPanel3.add(buttonFuncionamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 340, -1, -1));
@@ -146,6 +149,25 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
         jPanel3.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, -1));
+
+        BFS.setText("BFS");
+        BFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BFSActionPerformed(evt);
+            }
+        });
+        jPanel3.add(BFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 230, -1, -1));
+
+        DFS.setText("DFS");
+        DFS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DFSActionPerformed(evt);
+            }
+        });
+        jPanel3.add(DFS, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, -1, -1));
+
+        jLabel2.setText("Mostrar inventario a través de:");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazon (2).jpg"))); // NOI18N
         jLabel1.setText("fondo");
@@ -252,6 +274,16 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonRegresarMouseEntered
 
+    private void DFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DFSActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, menuInicial.miGrafo.DFSTodo());
+    }//GEN-LAST:event_DFSActionPerformed
+
+    private void BFSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BFSActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, menuInicial.miGrafo.BFSTodo());
+    }//GEN-LAST:event_BFSActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,6 +320,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BFS;
+    private javax.swing.JButton DFS;
     private javax.swing.JButton buttonAgregar;
     private javax.swing.JButton buttonFuncionamiento;
     private javax.swing.JButton buttonPedido;
@@ -295,6 +329,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAlmacen;
     private javax.swing.JComboBox<String> cbProducto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAlmacen;

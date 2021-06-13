@@ -72,6 +72,7 @@ public class FloydWarshallAlgorithm {
         return list;
     }
     public int[][] getPathMatrix(){
+        this.createPathMatrix();
         return pathMatrix;
     }
 }

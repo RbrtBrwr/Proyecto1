@@ -34,7 +34,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         buttonPedido = new javax.swing.JButton();
-        buttonDijkstra = new javax.swing.JButton();
         buttonEliminarAlmacen = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
@@ -50,17 +49,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
             }
         });
         jPanel1.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
-
-        buttonDijkstra.setText("Dijkstra");
-        buttonDijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonDijkstraMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonDijkstraMouseEntered(evt);
-            }
-        });
-        jPanel1.add(buttonDijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
 
         buttonEliminarAlmacen.setText("Eliminar Almacen");
         buttonEliminarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,19 +83,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void buttonDijkstraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonDijkstraMouseEntered
-
-    private void buttonDijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseClicked
-        // TODO add your handling code here:
-        InterfazDijkstra dijkstra = new InterfazDijkstra(this);
-        dijkstra.setLocationRelativeTo(null);
-        dijkstra.setVisible(true);
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_buttonDijkstraMouseClicked
 
     private void buttonEliminarAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonEliminarAlmacenMouseClicked
         // TODO add your handling code here:
@@ -212,7 +187,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonDijkstra;
     private javax.swing.JButton buttonEliminarAlmacen;
     private javax.swing.JButton buttonPedido;
     private javax.swing.JLabel jLabel2;
