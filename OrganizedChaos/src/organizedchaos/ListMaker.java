@@ -22,10 +22,18 @@ public class ListMaker {
     Nodo head = null;
     Nodo tail = null;
     
+    /**
+    * Indica si la lista esta vacia.
+    * @return
+    */
     public boolean isEmpty(){
         return head == null;
     }
     
+    /**
+    * Añade al principio de la lista.
+    * @param info
+    */
     public void addFirst(Object info){
         
         Nodo nuevo = new Nodo(info);
@@ -37,6 +45,10 @@ public class ListMaker {
         }
     }
     
+    /**
+    * Añade al final de la lista.
+    * @param info
+    */
     public void addLast(Object info){
         
         Nodo nuevo = new Nodo(info);
@@ -48,6 +60,9 @@ public class ListMaker {
         }
     }
     
+    /**
+    * Muestra los nodos que contiene la lista.
+    */
     public void showNodes(){
         
         Nodo track = head;
@@ -62,6 +77,11 @@ public class ListMaker {
         
     }
     
+    /**
+    * Retorna el nombre del nodo en cierta posicion.
+    * @param pos
+    * @return 
+    */
     public Object getName(int pos){
         Nodo track = head;
         int i = 0;
@@ -78,8 +98,10 @@ public class ListMaker {
         return " ";
     }
     
-    
-    
+    /**
+    * Elimina el nodo deseado de la lista.
+    * @param info
+    */
     public void remove(int info){
         Nodo track = head;
         Nodo anterior = null;
@@ -98,18 +120,10 @@ public class ListMaker {
         }
     }
     
-    void printReverse(Nodo next){
-        if (next != null) {
-            this.printReverse(next.sig);
-            System.out.println(next.info);
-        }   
-    }
-    
-    public void printReverse(){
-        Nodo track = head;
-        printReverse(track);
-    }
-    
+    /**
+    * Retorna el tamaño de la lista
+    * @return int tamaño
+    */
     public int getSize(){
         Nodo track = head;
         int counter = 0;
@@ -120,6 +134,11 @@ public class ListMaker {
         return counter;
     }
     
+    /**
+    * Retorna la posicion de un nodo
+    * @param busca
+    * @return int posicion
+    */
     public int getPos(int busca){
         Nodo track = head;
         for (int i = 0; i < this.getSize(); i++){
@@ -131,6 +150,11 @@ public class ListMaker {
         return -1;
     }
     
+    /**
+    * Retorna la posicion de un nodo
+    * @param busca
+    * @return int posicion
+    */
     public int find(Object busca){
         Nodo track = head;
         for (int i = 0; i < this.getSize(); i++){
@@ -142,6 +166,11 @@ public class ListMaker {
         return -1;
     }
     
+    /**
+    * Inserta un nodo en una poscion deseada.
+    * @param posicion
+    * @param info
+    */
     public void insertAt(int posicion, Object info){
         if (posicion == 0){
             this.addFirst(info);
@@ -161,8 +190,6 @@ public class ListMaker {
                 track = track.sig;
             }
         }
-        
-        //System.out.println("Posicion invalida");
     }
     
 

@@ -22,10 +22,18 @@ public class VisitedWarehousesList {
     Nodo head = null;
     Nodo tail = null;
     
+    /**
+     *Revisa si la lista esta vacia.
+     * @return
+     */
     public boolean isEmpty(){
         return head == null;
     }
     
+    /**
+     *Añade al principio de la lista.
+     * @param info
+     */
     public void addFirst(int info){
         
         Nodo nuevo = new Nodo(info);
@@ -37,6 +45,10 @@ public class VisitedWarehousesList {
         }
     }
     
+    /**
+     *Añade al final de la lista.
+     * @param info
+     */
     public void addLast(int info){
         
         Nodo nuevo = new Nodo(info);
@@ -48,6 +60,11 @@ public class VisitedWarehousesList {
         }
     }
     
+    /**
+     *Retorna el nodo que esta en la posicion del index.
+     * @param index
+     * @return
+     */
     public Nodo getInfo (int index){
         int counter = 0;
         Nodo track = head;
@@ -58,6 +75,9 @@ public class VisitedWarehousesList {
         return track;
     }
     
+    /**
+     *Muestra los Nodos de la lista.
+     */
     public void showNodes(){
         
         Nodo track = head;
@@ -72,6 +92,11 @@ public class VisitedWarehousesList {
         
     }
     
+    /**
+     *Retorna el nodo que esta en la posicion del pos
+     * @param pos
+     * @return
+     */
     public Object getName(int pos){
         Nodo track = head;
         int i = 0;
@@ -88,6 +113,10 @@ public class VisitedWarehousesList {
         return " ";
     }
     
+    /**
+     *Elimina el nodo.
+     * @param info
+     */
     public void remove(int info){
         Nodo track = head;
         Nodo anterior = null;
@@ -106,18 +135,10 @@ public class VisitedWarehousesList {
         }
     }
     
-    void printReverse(Nodo next){
-        if (next != null) {
-            this.printReverse(next.sig);
-            System.out.println(next.info);
-        }   
-    }
-    
-    public void printReverse(){
-        Nodo track = head;
-        printReverse(track);
-    }
-    
+    /**
+     *Retorna el tamaño de la lista.
+     * @return
+     */
     public int getSize(){
         Nodo track = head;
         int counter = 0;
@@ -128,6 +149,11 @@ public class VisitedWarehousesList {
         return counter;
     }
     
+    /**
+     *Retorna el nodo que esta en la posicion del busca
+     * @param pos
+     * @return
+     */
     public int getPos(int busca){
         Nodo track = head;
         for (int i = 0; i < this.getSize(); i++){
@@ -139,6 +165,11 @@ public class VisitedWarehousesList {
         return -1;
     }
     
+    /**
+     *Retorna el nodo que esta en la posicion del busca.
+     * @param pos
+     * @return
+     */
     public int find(int busca){
         Nodo track = head;
         for (int i = 0; i < this.getSize(); i++){
@@ -150,28 +181,10 @@ public class VisitedWarehousesList {
         return -1;
     }
     
-    public void insertAt(int posicion, int info){
-        if (posicion == 0){
-            this.addFirst(info);
-        } else if (posicion == (this.getSize() - 1)){
-            this.addLast(info);
-        } else {
-            Nodo track = head;
-            Nodo nuevo = new Nodo(info);
-            
-            for (int i = 0; i < this.getSize(); i++){
-                if ((i + 1) == posicion){
-                    Nodo temp = track.sig;
-                    track.sig = nuevo;
-                    nuevo.sig = temp;
-                    return;
-                }
-                track = track.sig;
-            }
-        }
-        
-    }
-    
+    /**
+     *Retorna el nodo que con el minimo valor.
+     * @return
+     */
     public int getMinimum(){
         Nodo tracker1 = head;
         int smallest = 999999;

@@ -406,6 +406,10 @@ public class Grafo {
         return outString;
     }
     
+    /**
+     * FloydWarshall temporal.
+     * @return 
+     */
     public MatrizAdy FWtemp(){
         MatrizAdy floydW = new MatrizAdy();
         for (int e = 0; e < laMatriz.numAlmacenes; e++){
@@ -437,6 +441,14 @@ public class Grafo {
         return floydW;
     }
 
+     /**
+     * Realiza el pedido de la lista.
+     * @param pedido
+     * @param almacen
+     * @param floyd
+     * @param itemList
+     * @return 
+     */
     public ListI realizarPedido(ListI pedido, Warehouse almacen, FloydWarshallAlgorithm floyd, ListI itemsList){
         ListI envio = new ListI();
         envio = almacen.envios(pedido, envio, itemsList);
@@ -462,15 +474,32 @@ public class Grafo {
         return envio;
     }
     
+    /**
+     * Agrega un pedido a la lista.
+     * @param pedido
+     * @param cantidad
+     * @return 
+     */
     public void agregarPedido(ListI pedido, String item, int cantidad){
         Inventory nuevo = new Inventory(item, cantidad);
         pedido.agregarItem(nuevo);
     }
     
+    /**
+     * Agrega al inventario.
+     * @param almacen
+     * @param item
+     * @param cantidad
+     * @return 
+     */
     public void agregarInventario(Warehouse almacen, String item, int cantidad){
         almacen.agregarProducto(item, cantidad);
     }
     
+    /**
+     * Genera String para guardar los Cambios.
+     * @return 
+     */
     public String paraGuardar(){
         String almacenes = this.warehouseList.guardarArchivo();
         String rutas = this.roadsList.guardarArchivo();

@@ -27,6 +27,9 @@ public class FloydWarshallAlgorithm {
         this.shortPath = new int [vertixNumber][vertixNumber];
     }
     
+    /**
+    * Genera la matriz de distancias minimas y de caminos.
+    */
     public void createPathMatrix (){
         for (int j = 0; j < vertixNumber; j++) {
             for (int k = 0; k < vertixNumber; k++) {
@@ -58,10 +61,24 @@ public class FloydWarshallAlgorithm {
             }
         }   
     }
+    
+    /**
+    * Retorna la distancia minima entre dos almacenes.
+    * @param wareHouse1
+    * @param wareHouse2
+    * @return int distancia.
+    */
     public int returnDistance (int wareHouse1, int wareHouse2){
         int distance = pathMatrix [wareHouse1][wareHouse2];
         return distance;
     }
+    
+    /**
+    * Crea una lista con los almacenes que se visitan para llegar de un almacen a otro.
+    * @param wareHouse1
+    * @param wareHouse2
+    * @return lista de almacenes visitados.
+    */
     public VisitedWarehousesList showPath(int wareHouse1, int wareHouse2){
         VisitedWarehousesList list = new VisitedWarehousesList();
         list.addLast(wareHouse1);
@@ -72,6 +89,11 @@ public class FloydWarshallAlgorithm {
         }
         return list;
     }
+    
+    /**
+    * Retorna la matriz de caminos.
+    * @return matriz de caminos.
+    */
     public int[][] getPathMatrix(){
         this.createPathMatrix();
         return pathMatrix;

@@ -20,6 +20,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Ignacio
  */
 public class Openertxt {
+    /**
+    * Lee un archivo seleccionado.
+    */
     public static String read() {
         String text = "";
         Scanner entry = null;
@@ -56,6 +59,9 @@ public class Openertxt {
         return text;
     }
     
+    /**
+    * Sobreescribe toda la información en un archivo seleccionado.
+    */
     public static void write(String escribir){
         //Se crea el JFileChooser. Se le indica que la ventana se abra en el directorio actual                    
         JFileChooser fileChooser = new JFileChooser(".");      

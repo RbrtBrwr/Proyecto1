@@ -81,6 +81,10 @@ public class ListS {
         System.out.println("Calle no existe");
     }
     
+    /**
+     * Retorna un String para guardar los cambios que sufrió el archivo.
+     * @return String
+     */
     public String guardarArchivo(){
         String archivo = "Rutas;\n";
         Nodo track = this.headS;

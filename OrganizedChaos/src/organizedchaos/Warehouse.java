@@ -147,10 +147,21 @@ public class Warehouse {
         }
     }
     
+    /**
+     *Descuenta el producto.
+     * @param producto
+     */
     public void descontar(Inventory producto){
         this.items.descontar(producto);
     }
     
+    /**
+     *Realiza el envio de los productos en la lista.
+     * @param pedido
+     * @param envio
+     * @param itemList
+     * @return
+     */
     public ListI envios(ListI pedido, ListI envio, ListI itemsList){
         ListI.Nodo track = pedido.headI;
         while(track != null){
@@ -186,6 +197,10 @@ public class Warehouse {
         return cercano;
     }
     
+    /**
+     *Retorna el la posicion del almacen.
+     * @return
+     */
     public int getPosition(){
         return numAlmacen;
     }
