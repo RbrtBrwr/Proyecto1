@@ -42,9 +42,9 @@ public class InterfazAgregarAlmacen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         txtAgregar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        buttonAgregar = new javax.swing.JButton();
         cbAlmacen = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        buttonAgregar = new javax.swing.JButton();
         txtDistanciaEntrada = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -58,10 +58,20 @@ public class InterfazAgregarAlmacen extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(txtAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 90, -1));
+        jPanel1.add(txtAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 180, -1));
 
         jLabel1.setText("Nombre del almacén a agregar");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, 20));
+
+        cbAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAlmacenActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 110, -1));
+
+        jLabel2.setText("Almacén de entrada");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
 
         buttonAgregar.setText("Agregar");
         buttonAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -72,31 +82,26 @@ public class InterfazAgregarAlmacen extends javax.swing.JFrame {
                 buttonAgregarMouseEntered(evt);
             }
         });
-        jPanel1.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 110, -1));
-
-        jPanel1.add(cbAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 100, -1));
-
-        jLabel2.setText("Almacén de entrada");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
-        jPanel1.add(txtDistanciaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 100, -1));
+        jPanel1.add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 120, -1));
+        jPanel1.add(txtDistanciaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 120, -1));
 
         jLabel3.setText("Almacén de salida");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 40, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
 
         jLabel4.setText("Distancia salida");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, -1, -1));
 
         buttonRegresar.setText("Regresar");
         jPanel1.add(buttonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, -1, -1));
 
         buttonFuncionamiento.setText("Funcionamiento");
         jPanel1.add(buttonFuncionamiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, -1, -1));
-        jPanel1.add(txtDistanciaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 100, -1));
+        jPanel1.add(txtDistanciaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, 120, -1));
 
         jLabel5.setText("Distancia entrada");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 120, -1));
 
-        jPanel1.add(cbAlmacenSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 90, -1));
+        jPanel1.add(cbAlmacenSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 120, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 650, 240));
 
@@ -107,40 +112,84 @@ public class InterfazAgregarAlmacen extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean continuar = true;
         try{
-            while (continuar){
-                String almacenAgregado = txtAgregar.getText();
-                int calleEntrada = Integer.parseInt(txtDistanciaEntrada.getText());
-                int calleSalida = Integer.parseInt(txtDistanciaSalida.getText());
-                String almacenEntrada = cbAlmacen.getSelectedItem().toString();
-                String almacenSalida = cbAlmacenSalida.getSelectedItem().toString();
-                String conexion = cbAlmacenSalida.getSelectedItem().toString();
-                String producto = "hacerqueloingrese";
-                cbAlmacen.removeItem(almacenEntrada);
-                cbAlmacenSalida.removeItem(almacenSalida);
+            String almacenAgregado = txtAgregar.getText();
+            int calleEntrada = Integer.parseInt(txtDistanciaEntrada.getText());
+            int calleSalida = Integer.parseInt(txtDistanciaSalida.getText());
+            String almacenEntrada = cbAlmacen.getSelectedItem().toString();
+            String almacenSalida = cbAlmacenSalida.getSelectedItem().toString();
+            String conexion = cbAlmacenSalida.getSelectedItem().toString();
+            String producto;
+            int cantidad;
+
+            //Condición para calle de entrada
+            if (menuInicial.miGrafo.warehouseList.getWarehouse(almacenAgregado) == null && almacenEntrada != almacenSalida) {
+
+                Street nuevaCalleEntrada = new Street(almacenAgregado, almacenEntrada, calleEntrada);
+                Street nuevaCalleSalida = new Street(almacenSalida, almacenAgregado, calleSalida);
+                menuInicial.miGrafo.roadsList.addLast(nuevaCalleEntrada);
+                menuInicial.miGrafo.roadsList.addLast(nuevaCalleSalida);
+                menuInicial.miGrafo.agregarCalle(nuevaCalleEntrada);       
+                menuInicial.miGrafo.agregarCalle(nuevaCalleSalida);
+                ListI nuevaListaInventario = new ListI();
                 
-                //Condición para calle de entrada
-                if (menuInicial.miGrafo.warehouseList.getWarehouse(almacenAgregado) == null && almacenEntrada != almacenSalida) {
-                    
-                    Street nuevaCalleEntrada = new Street(almacenAgregado, almacenEntrada, calleEntrada);
-                    Street nuevaCalleSalida = new Street(almacenAgregado, almacenSalida, calleSalida);
-                    menuInicial.miGrafo.agregarCalle(nuevaCalleEntrada);       
-                    menuInicial.miGrafo.agregarCalle(nuevaCalleSalida);
-                    JOptionPane.showMessageDialog(null, "Se agregaron calles");
-                    //menuInicial.miGrafo.warehouseList.addLast(info);
-        }   
-            }  
+                int productosAgregar;
+                productosAgregar = Integer.parseInt(JOptionPane.showInputDialog("Por favor ingrese la cantidad de productos que desea agregar"));
+                for (int i = 0; i < productosAgregar; i++) {
+                    producto = JOptionPane.showInputDialog("Por favor ingrese el producto número "+(i+1)+ " que desea agregar");
+                    cantidad = Integer.parseInt(JOptionPane.showInputDialog("Por favor la cantidad de " +producto+" disponible en su almacen."));
+                    Inventory nuevoInventario = new Inventory(producto, cantidad);
+                    nuevaListaInventario.addLast(nuevoInventario);   
+                }
+                Warehouse nuevoAlmacen = new Warehouse(almacenAgregado, nuevaListaInventario);
+                //menuInicial.miGrafo.warehouseList.addLast(nuevoAlmacen);
+                //menuInicial.miGrafo.warehouseList.showNodes();
+                menuInicial.miGrafo = menuInicial.miGrafo.agregarAlmacen(nuevoAlmacen, nuevaCalleSalida, nuevaCalleSalida);
+                
+                JOptionPane.showMessageDialog(null, "Almacén agregado exitosamente");
+                menuInicial.miGrafo.mostrarMatriz();
+                menuInicial.miGrafo.roadsList.showNodes();
+                
+                
+            }           
+          
+             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error. Dato inválido. Para máyor información revise el funcionamiento.");
         }
         
-        
-        
-        
+        int agregarOtro = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro almacén?");
+        if (agregarOtro == 0) {
+            txtAgregar.setText("");
+            txtDistanciaEntrada.setText("");
+            txtDistanciaSalida.setText("");
+            cbAlmacen.removeAllItems();
+            cbAlmacenSalida.removeAllItems();
+            for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
+                cbAlmacen.addItem(menuInicial.miGrafo.warehouseList.getWarehouse(i).name);
+                cbAlmacenSalida.addItem(menuInicial.miGrafo.warehouseList.getWarehouse(i).name);
+            }
+        } 
+        else {
+            txtAgregar.setText("");
+            txtDistanciaEntrada.setText("");
+            txtDistanciaSalida.setText("");
+            cbAlmacen.removeAllItems();
+            cbAlmacenSalida.removeAllItems();
+            for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
+                cbAlmacen.addItem(menuInicial.miGrafo.warehouseList.getWarehouse(i).name);
+                cbAlmacenSalida.addItem(menuInicial.miGrafo.warehouseList.getWarehouse(i).name);
+            this.setVisible(false); //Tiene que hacerse dispose para que la próxima vez que se llame empiece desde cero
+            }
+        }
     }//GEN-LAST:event_buttonAgregarMouseClicked
 
     private void buttonAgregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAgregarMouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonAgregarMouseEntered
+
+    private void cbAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlmacenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAlmacenActionPerformed
 
     /**
      * @param args the command line arguments

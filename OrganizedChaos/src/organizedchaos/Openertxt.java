@@ -53,7 +53,7 @@ public class Openertxt {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Erro al guardar los cambios.");
+            JOptionPane.showMessageDialog(null, "Error al abrir el archivo.");
             return null;
         }
         return text;
@@ -85,7 +85,7 @@ public class Openertxt {
 
             } 
         } else {
-            System.out.println("No se ha seleccionado ningún fichero");
+            JOptionPane.showMessageDialog(null, "Error al guardar los cambios.");
             return;
         }
     }

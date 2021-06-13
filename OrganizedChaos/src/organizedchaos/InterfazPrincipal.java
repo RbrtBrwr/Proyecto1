@@ -36,8 +36,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         this.listaPedido = new ListI();
         this.listaNodosDijkstra = new ListDijkstra();
         ListMaker productos = new ListMaker(); //Se crea lista vacía para almacenar todos los productos sin repetición a partir de la clase ListMaker
-        cbAlgoritmo.addItem("Dijkstra");
         cbAlgoritmo.addItem("Floyd-Warshall");
+        cbAlgoritmo.addItem("Dijkstra");
         
         for (int i = 0; i < menuInicial.miGrafo.warehouseList.getSize(); i++) {
         //Este ciclo es para recorrer todos los Almacenes en el grafo e ir llenando las listas desplegables del a interfaz.
@@ -86,6 +86,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         buttonPedido = new javax.swing.JButton();
         cbAlgoritmo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -135,6 +138,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 buttonRegresarMouseEntered(evt);
             }
         });
+        buttonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRegresarActionPerformed(evt);
+            }
+        });
         jPanel3.add(buttonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
 
         txtPedido.setColumns(20);
@@ -165,6 +173,25 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         jLabel2.setText("Algoritmo");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+
+        jButton1.setText("BFS");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+
+        jButton2.setText("DFS");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, -1, -1));
+
+        jLabel3.setText("Mostrar inventarios a través de:");
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazon (2).jpg"))); // NOI18N
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 400));
@@ -222,18 +249,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void buttonPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonPedidoMouseClicked
         // TODO add your handling code here:
         
-        //if (){
+        if (cbAlgoritmo.getSelectedItem().toString().equalsIgnoreCase("Floyd-Warshall")){
             Warehouse warehouseName = menuInicial.warehouseList.getWarehouse(almacen);
             FloydWarshallAlgorithm pathMatrix = new FloydWarshallAlgorithm(menuInicial.miGrafo, menuInicial.warehouseList.getSize());
-            int [][] matrix = pathMatrix.getPathMatrix();
             ListI envio = menuInicial.miGrafo.realizarPedido(listaPedido, warehouseName, pathMatrix, menuInicial.itemsList);
             String envioString = "";
             for (int i = 0; i < envio.size; i++) {
                 envioString += envio.getNode(i).info.name + ": " + envio.getNode(i).info.quantity + "\n";
             }
             JOptionPane.showMessageDialog(null, "Su pedido se ha realizado exitosamente: \n" + envioString);
-        //}
-        //else {
+        }
+        else {
             stringPedido = null;
         
             //Se llena la lista inicial del Dijkstra
@@ -262,6 +288,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                     shortP.addLast(listaNodosDijkstra.getInfoAlmacen2(inW.getName(j)).distMinimaInicio);
                 }
             }
+        }
     }//GEN-LAST:event_buttonPedidoMouseClicked
 
     private void buttonRegresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonRegresarMouseEntered
@@ -280,6 +307,20 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private void cbAlgoritmoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAlgoritmoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbAlgoritmoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, menuInicial.miGrafo.BFSTodo());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, menuInicial.miGrafo.DFSTodo());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void buttonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,8 +367,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAlgoritmo;
     private javax.swing.JComboBox<String> cbAlmacen;
     private javax.swing.JComboBox<String> cbProducto;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAlmacen;

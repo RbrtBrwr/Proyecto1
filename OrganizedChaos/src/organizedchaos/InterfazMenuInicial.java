@@ -36,9 +36,10 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         buttonPedido = new javax.swing.JButton();
-        buttonDijkstra = new javax.swing.JButton();
         buttonAgregarAlmacen = new javax.swing.JButton();
         buttonEliminarAlmacen = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        GestionarStock = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,18 +53,7 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 buttonPedidoMouseClicked(evt);
             }
         });
-        jPanel1.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, -1, -1));
-
-        buttonDijkstra.setText("Dijkstra");
-        buttonDijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                buttonDijkstraMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                buttonDijkstraMouseEntered(evt);
-            }
-        });
-        jPanel1.add(buttonDijkstra, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, -1, -1));
+        jPanel1.add(buttonPedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 120, -1));
 
         buttonAgregarAlmacen.setText("Agregar Almacen");
         buttonAgregarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -71,7 +61,12 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 buttonAgregarAlmacenMouseClicked(evt);
             }
         });
-        jPanel1.add(buttonAgregarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
+        buttonAgregarAlmacen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAgregarAlmacenActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonAgregarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         buttonEliminarAlmacen.setText("Eliminar Almacen");
         buttonEliminarAlmacen.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,7 +74,23 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
                 buttonEliminarAlmacenMouseClicked(evt);
             }
         });
-        jPanel1.add(buttonEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, -1, -1));
+        jPanel1.add(buttonEliminarAlmacen, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+
+        jButton1.setText("Guardar Cambios");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 140, -1));
+
+        GestionarStock.setText("Gestionar Stock");
+        GestionarStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                GestionarStockMouseClicked(evt);
+            }
+        });
+        jPanel1.add(GestionarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 230, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/amazonWarehouse.jpg"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -107,19 +118,6 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void buttonDijkstraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonDijkstraMouseEntered
-
-    private void buttonDijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonDijkstraMouseClicked
-        // TODO add your handling code here:
-        InterfazDijkstra dijkstra = new InterfazDijkstra(this);
-        dijkstra.setLocationRelativeTo(null);
-        dijkstra.setVisible(true);
-        this.setVisible(false);
-        
-    }//GEN-LAST:event_buttonDijkstraMouseClicked
-
     private void buttonAgregarAlmacenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAgregarAlmacenMouseClicked
         // TODO add your handling code here:
         InterfazAgregarAlmacen agregarAlmacen = new InterfazAgregarAlmacen(this);
@@ -144,6 +142,19 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
         file.write(newFile);
         JOptionPane.showMessageDialog(null, "Se han guardado los cambios exitósamente.");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonAgregarAlmacenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarAlmacenActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_buttonAgregarAlmacenActionPerformed
+
+    private void GestionarStockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GestionarStockMouseClicked
+        // TODO add your handling code here:
+        InterfazGestionarStock gestionarStock = new InterfazGestionarStock(this);
+        gestionarStock.setLocationRelativeTo(null);
+        gestionarStock.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_GestionarStockMouseClicked
 
     /**
      * @param args the command line arguments
@@ -241,10 +252,11 @@ public class InterfazMenuInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton GestionarStock;
     private javax.swing.JButton buttonAgregarAlmacen;
-    private javax.swing.JButton buttonDijkstra;
     private javax.swing.JButton buttonEliminarAlmacen;
     private javax.swing.JButton buttonPedido;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
