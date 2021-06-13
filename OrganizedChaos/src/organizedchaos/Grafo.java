@@ -444,17 +444,19 @@ public class Grafo {
             return envio;
         } else {
             Warehouse cercano = warehouseList.getWarehouse(almacen.getNearest(floyd.getPathMatrix(), warehouseList.getSize()));
-            VisitedWarehousesList path = floyd.showPath(almacen.numAlmacen, cercano.numAlmacen);
+            VisitedWarehousesList path = floyd.showPath(cercano.numAlmacen, almacen.numAlmacen);
             String pathW = "";
             for (int i = 0; i < path.getSize(); i++) {
-                pathW += path.getInfo(i).info + " <==== ";
+                int wN = path.getInfo(i).info;
+                if (i == path.getSize() - 1){
+                   pathW += warehouseList.getName(wN); 
+                }
+                else{
+                    pathW += warehouseList.getName(wN) + " <==== ";
+                }
+
             }
-            pathW = pathW.replace("0", "A");
-            pathW = pathW.replace("1", "B");
-            pathW = pathW.replace("2", "C");
-            pathW = pathW.replace("3", "D");
-            pathW = pathW.replace("4", "E");
-            JOptionPane.showMessageDialog(null, "Se visitaron los siguientes almacenes para completar su pedido: \n" + pathW + almacen.name.replace("Almacen ", "") );
+            JOptionPane.showMessageDialog(null, "Se visitaron los siguientes almacenes para completar su pedido: \n" + pathW + "\n Se recorrió una distancia de: " + floyd.returnDistance(cercano.numAlmacen, almacen.numAlmacen));
             envio.juntar(this.realizarPedido(pedido, cercano, floyd, itemsList));
         }
         return envio;
