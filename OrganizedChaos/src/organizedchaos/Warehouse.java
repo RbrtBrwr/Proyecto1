@@ -142,11 +142,16 @@ public class Warehouse {
         }
     }
     
+    public void descontar(Inventory producto){
+        this.items.descontar(producto);
+    }
+    
     public ListI envios(ListI pedido, ListI envio, ListI itemsList){
         ListI.Nodo track = pedido.headI;
         while(track != null){
             if (this.buscarProducto(track.info)){
                 envio.agregarItem(track.info.name, track.info.quantity);
+                this.descontar(track.info);
                 pedido.descontar(track.info);
                 itemsList.descontar(track.info);
                 //this.items.descontar(track.info);
