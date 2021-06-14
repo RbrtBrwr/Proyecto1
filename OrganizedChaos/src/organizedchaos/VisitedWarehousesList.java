@@ -48,6 +48,17 @@ public class VisitedWarehousesList {
         }
     }
     
+    public Nodo getInfo (int index){
+        int counter = 0;
+        Nodo track = head;
+        while (counter != index){
+            track = track.sig;
+            counter ++;
+        }
+        return track;
+    }
+    
+
     public void showNodes(){
         
         Nodo track = head;
@@ -159,7 +170,5 @@ public class VisitedWarehousesList {
                 track = track.sig;
             }
         }
-        
-        //System.out.println("Posicion invalida");
     }
 }

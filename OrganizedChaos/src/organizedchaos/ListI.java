@@ -21,6 +21,7 @@ public class ListI{ //Lista para inventarios
     }
     Nodo headI = null;
     Nodo tailI = null;
+    int size = 0;
     
     public boolean empty(){
         return headI == null;
@@ -71,9 +72,11 @@ public class ListI{ //Lista para inventarios
         Nodo nuevo = new Nodo(info);
         if (headI == null){
             headI = tailI = nuevo;
+            size ++;
         } else {
             tailI.sig = nuevo;
             tailI = nuevo;
+            size ++;
         }
     }
     
@@ -98,6 +101,7 @@ public class ListI{ //Lista para inventarios
         Nodo pasado = headI;
         if (headI.info == item){
             headI = headI.sig;
+            size --;
             return;
         }
         while (track != null){
@@ -107,6 +111,8 @@ public class ListI{ //Lista para inventarios
             }
             pasado = track;
             track = track.sig;
+            size --;
+
         }
     }
     
@@ -198,5 +204,40 @@ public class ListI{ //Lista para inventarios
         }
         archivo += ";\n";
         return archivo;
+    }
+
+    
+    public Nodo getNode (int index){
+        Nodo track = headI;
+        int counter = 0;
+        while (index != counter){
+            track = track.sig;
+            counter ++;
+        }
+        return track;
+    }
+        
+    public void group(){
+        Nodo guide;
+        Nodo tracker;
+        for (int i = 0; i < size; i++) {
+            guide = this.getNode(i);
+            for (int j = i+1; j < size; j ++) {
+                tracker = this.getNode(j);
+                if (guide.info.name.equalsIgnoreCase(tracker.info.name)){
+                    guide.info.quantity += tracker.info.quantity;
+                    this.eliminarItem(tracker.info);
+                }
+            }
+        }
+    }    
+    
+    public Boolean checkquantity(String name, int number){
+        if (this.buscarItem(name).quantity < number){
+            return false;
+        }
+        else{
+            return true;
+        } 
     }
 }

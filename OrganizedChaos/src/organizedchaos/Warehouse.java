@@ -105,17 +105,7 @@ public class Warehouse {
         }
         return outString;
     }
-    
-//    public String buscarProducto(Inventory producto){
-//        String outString = "";
-//        Inventory encontrado = this.items.buscarItem(producto.name);
-//        if (encontrado != null){
-//            outString += "Inventario " + this.name + ":\n";
-//            outString += encontrado.name + ": " + encontrado.quantity + "\n";
-//        }
-//        return outString;
-//    }
-    
+
     public boolean buscarProducto(Inventory producto){
         Inventory encontrado = this.items.buscarItem(producto.name);
         return encontrado != null;
@@ -152,13 +142,20 @@ public class Warehouse {
         }
     }
     
-    public ListI envios(ListI pedido, ListI envio){
+
+    public void descontar(Inventory producto){
+        this.items.descontar(producto);
+    }
+    
+    public ListI envios(ListI pedido, ListI envio, ListI itemsList){
+
         ListI.Nodo track = pedido.headI;
         while(track != null){
             if (this.buscarProducto(track.info)){
                 envio.agregarItem(track.info.name, track.info.quantity);
+                this.descontar(track.info);
                 pedido.descontar(track.info);
-                //this.items.descontar(track.info);
+                itemsList.descontar(track.info);
                 
             }
             track = track.sig;
@@ -169,8 +166,7 @@ public class Warehouse {
     public int getNearest(int[][] floyd, int numAlmacenes){
         int este = this.numAlmacen;
         int cercano = -1;
-        int distanciaMin = 999;
-        
+        int distanciaMin = 999;  
         for (int i = 0; i < numAlmacenes; i++){
             if (floyd[i][este] < distanciaMin && floyd[i][este] != 0){
                 cercano = i;
@@ -180,5 +176,8 @@ public class Warehouse {
         return cercano;
     }
     
-    
+
+    public int getPosition(){
+        return numAlmacen;
+    }    
 }

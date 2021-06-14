@@ -1,6 +1,10 @@
 Almacenes;
 Almacen A:
+<<<<<<< HEAD
 Pantalla,3
+=======
+Pantalla,6
+>>>>>>> Ignacio
 RAM,2
 Procesador,1;
 Almacen B:
@@ -14,7 +18,10 @@ Mouse,2;
 Almacen E:
 Microfono,7
 Audifonos,10;
+<<<<<<< HEAD
 Almacen F:
+=======
+>>>>>>> Ignacio
 Rutas;
 A,B,10
 A,C,20
@@ -24,5 +31,8 @@ C,D,4
 C,E,13
 D,E,3
 E,A,25
+<<<<<<< HEAD
 A,F,1
 F,E,2
+=======
+>>>>>>> Ignacio

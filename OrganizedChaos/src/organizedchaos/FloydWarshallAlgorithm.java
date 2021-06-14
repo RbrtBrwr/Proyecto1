@@ -17,11 +17,17 @@ public class FloydWarshallAlgorithm {
     int a;
     int b;
     
-    public void createPathMatrix (Grafo miGrafo, int size){
-        weightMatrix = miGrafo.laMatriz.mAdy;
-        vertixNumber = size;
-        pathMatrix = new int [vertixNumber][vertixNumber];
-        shortPath = new int [vertixNumber][vertixNumber];
+
+
+    public FloydWarshallAlgorithm (Grafo miGrafo, int size){
+        this.weightMatrix = miGrafo.laMatriz.mAdy;
+        this.vertixNumber = size;
+        this.pathMatrix = new int [vertixNumber][vertixNumber];
+        this.shortPath = new int [vertixNumber][vertixNumber];
+    }
+    
+    public void createPathMatrix (){
+
         for (int j = 0; j < vertixNumber; j++) {
             for (int k = 0; k < vertixNumber; k++) {
                 shortPath [j][k] = k;
@@ -58,12 +64,19 @@ public class FloydWarshallAlgorithm {
     }
     public VisitedWarehousesList showPath(int wareHouse1, int wareHouse2){
         VisitedWarehousesList list = new VisitedWarehousesList();
-        while((shortPath [wareHouse1][wareHouse2] != -1)){
+
+        while((wareHouse1 != wareHouse2)){
+
            int first = shortPath [wareHouse1][wareHouse2]; 
            list.addFirst(first);
            wareHouse1 = first;
         }
         return list;
     }
-    
+
+    public int[][] getPathMatrix(){
+        this.createPathMatrix();
+        return pathMatrix;
+    }
+
 }

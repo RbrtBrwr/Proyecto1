@@ -85,7 +85,7 @@ public class ListW {
         }
         return null;
     }
-    
+
     public Warehouse getWarehouse(String name){
         NodoW track = headW;
         while (track.sig != null){
@@ -98,7 +98,7 @@ public class ListW {
         }
         return null;
     }
-    
+
     /**
      * Retorna la posicion del warehouse indicado
      * @param check
@@ -178,5 +178,4 @@ public class ListW {
         }
         return archivo;
     }
-    
 }
